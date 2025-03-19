@@ -25,63 +25,63 @@ const mcpServers = [
     name: "AWS KB Retrieval",
     description: "Retrieval from AWS Knowledge Base using Bedrock Agent Runtime",
     category: "Reference Servers",
-    type: "reference",
+    type: "reference" as const,
     tags: ["AWS", "Knowledge Base", "Bedrock"]
   },
   {
     name: "Brave Search",
     description: "Web and local search using Brave's Search API",
     category: "Reference Servers",
-    type: "reference",
+    type: "reference" as const,
     tags: ["Search", "Web Search", "API"]
   },
   {
     name: "EverArt",
     description: "AI image generation using various models",
     category: "Reference Servers",
-    type: "reference",
+    type: "reference" as const,
     tags: ["AI", "Image Generation", "Creative"]
   },
   {
     name: "Filesystem",
     description: "Secure file operations with configurable access controls",
     category: "Reference Servers",
-    type: "reference",
+    type: "reference" as const,
     tags: ["Files", "Security", "Storage"]
   },
   {
     name: "21st.dev Magic",
     description: "Create crafted UI components inspired by the best 21st.dev design engineers",
     category: "Official Integrations",
-    type: "official",
+    type: "official" as const,
     tags: ["UI", "Components", "Design"]
   },
   {
     name: "AgentQL",
     description: "Enable AI agents to get structured data from unstructured web with AgentQL",
     category: "Official Integrations",
-    type: "official", 
+    type: "official" as const, 
     tags: ["Web", "Data", "Structured"]
   },
   {
     name: "Apify",
     description: "Actors MCP Server: Use 3,000+ pre-built cloud tools to extract data from websites",
     category: "Official Integrations",
-    type: "official",
+    type: "official" as const,
     tags: ["Extraction", "Web", "Cloud"]
   },
   {
     name: "Ableton Live",
     description: "An MCP server to control Ableton Live",
     category: "Community Servers",
-    type: "community",
+    type: "community" as const,
     tags: ["Music", "Audio", "DAW"]
   },
   {
     name: "Airbnb",
     description: "Provides tools to search Airbnb and get listing details",
     category: "Community Servers",
-    type: "community",
+    type: "community" as const,
     tags: ["Travel", "Accommodation", "Search"]
   }
 ];
