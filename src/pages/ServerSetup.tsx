@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
@@ -6,111 +5,9 @@ import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
-import { getServerById } from '@/lib/mockData';
+import { getServerById, serverSetupInstructions } from '@/lib/mockData';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
-// Mock setup instructions data - in a real app, this would come from an API or database
-const serverSetupInstructions: Record<string, {
-  description: string;
-  features: string[];
-  tools: Array<{ name: string; description: string; inputs: Array<{ name: string; type: string; description: string; optional?: boolean; }> }>;
-  configuration: string;
-  usageExamples: { 
-    docker?: string;
-    npx?: string;
-    pip?: string;
-  };
-  license: string;
-}> = {
-  "1": { // AWS KB Retrieval
-    description: "An MCP server implementation for retrieving information from the AWS Knowledge Base using the Bedrock Agent Runtime.",
-    features: [
-      "RAG (Retrieval-Augmented Generation): Retrieve context from the AWS Knowledge Base based on a query and a Knowledge Base ID.",
-      "Supports multiple results retrieval: Option to retrieve a customizable number of results."
-    ],
-    tools: [
-      {
-        name: "retrieve_from_aws_kb",
-        description: "Perform retrieval operations using the AWS Knowledge Base.",
-        inputs: [
-          { name: "query", type: "string", description: "The search query for retrieval." },
-          { name: "knowledgeBaseId", type: "string", description: "The ID of the AWS Knowledge Base." },
-          { name: "n", type: "number", description: "Number of results to retrieve (default: 3).", optional: true }
-        ]
-      }
-    ],
-    configuration: "## Setting up AWS Credentials\n\n- Obtain AWS access key ID, secret access key, and region from the AWS Management Console.\n- Ensure these credentials have appropriate permissions for Bedrock Agent Runtime operations.",
-    usageExamples: {
-      docker: `{
-  "mcpServers": {
-    "aws-kb-retrieval": {
-      "command": "docker",
-      "args": [ "run", "-i", "--rm", "-e", "AWS_ACCESS_KEY_ID", "-e", "AWS_SECRET_ACCESS_KEY", "-e", "AWS_REGION", "mcp/aws-kb-retrieval-server" ],
-      "env": {
-        "AWS_ACCESS_KEY_ID": "YOUR_ACCESS_KEY_HERE",
-        "AWS_SECRET_ACCESS_KEY": "YOUR_SECRET_ACCESS_KEY_HERE",
-        "AWS_REGION": "YOUR_AWS_REGION_HERE"
-      }
-    }
-  }
-}`,
-      npx: `{
-  "mcpServers": {
-    "aws-kb-retrieval": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-aws-kb-retrieval"
-      ],
-      "env": {
-        "AWS_ACCESS_KEY_ID": "YOUR_ACCESS_KEY_HERE",
-        "AWS_SECRET_ACCESS_KEY": "YOUR_SECRET_ACCESS_KEY_HERE",
-        "AWS_REGION": "YOUR_AWS_REGION_HERE"
-      }
-    }
-  }
-}`
-    },
-    license: "This MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository."
-  },
-  "2": { // Brave Search
-    description: "An MCP server implementation for web and local search using Brave's Search API.",
-    features: [
-      "Web search: Search the web using Brave's Search API",
-      "Local search: Perform local searches within your content"
-    ],
-    tools: [
-      {
-        name: "brave_search",
-        description: "Perform web searches using Brave's Search API.",
-        inputs: [
-          { name: "query", type: "string", description: "The search query." },
-          { name: "count", type: "number", description: "Number of results to retrieve (default: 5).", optional: true }
-        ]
-      }
-    ],
-    configuration: "## Setting up Brave Search API\n\n- Sign up for Brave Search API at https://brave.com/search/api/\n- Obtain your API key from the developer dashboard\n- Configure environment variables as shown in the examples below",
-    usageExamples: {
-      npx: `{
-  "mcpServers": {
-    "brave-search": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-brave-search"
-      ],
-      "env": {
-        "BRAVE_API_KEY": "YOUR_BRAVE_API_KEY_HERE"
-      }
-    }
-  }
-}`
-    },
-    license: "This MCP server is licensed under the MIT License."
-  }
-  // Additional servers can be added here following the same pattern
-};
 
 const ServerSetup = () => {
   const { id } = useParams<{ id: string }>();
