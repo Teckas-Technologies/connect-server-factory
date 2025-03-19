@@ -12,7 +12,8 @@ import {
   Calendar,
   Tag,
   Code,
-  Copy 
+  Copy,
+  Terminal
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -155,6 +156,15 @@ print(response)`;
                     <Calendar className="h-4 w-4" />
                     <span>Added {new Date(server.createdAt).toLocaleDateString()}</span>
                   </div>
+                </div>
+                
+                <div className="mt-6 pt-6 border-t">
+                  <Button asChild className="w-full sm:w-auto">
+                    <Link to={`/server/${server.id}/setup`}>
+                      <Terminal className="mr-2 h-4 w-4" />
+                      View Setup Instructions
+                    </Link>
+                  </Button>
                 </div>
               </div>
               
