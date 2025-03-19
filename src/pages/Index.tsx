@@ -8,6 +8,7 @@ import Hero from '@/components/Hero';
 import ServerGrid from '@/components/ServerGrid';
 import ServerCard from '@/components/ServerCard';
 import CategoryCard from '@/components/CategoryCard';
+import ServerTable from '@/components/ServerTable';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
 import { 
@@ -17,6 +18,73 @@ import {
   getTopRatedServers 
 } from '@/lib/mockData';
 import { cn } from '@/lib/utils';
+
+// Example MCP servers data
+const mcpServers = [
+  {
+    name: "AWS KB Retrieval",
+    description: "Retrieval from AWS Knowledge Base using Bedrock Agent Runtime",
+    category: "Reference Servers",
+    type: "reference",
+    tags: ["AWS", "Knowledge Base", "Bedrock"]
+  },
+  {
+    name: "Brave Search",
+    description: "Web and local search using Brave's Search API",
+    category: "Reference Servers",
+    type: "reference",
+    tags: ["Search", "Web Search", "API"]
+  },
+  {
+    name: "EverArt",
+    description: "AI image generation using various models",
+    category: "Reference Servers",
+    type: "reference",
+    tags: ["AI", "Image Generation", "Creative"]
+  },
+  {
+    name: "Filesystem",
+    description: "Secure file operations with configurable access controls",
+    category: "Reference Servers",
+    type: "reference",
+    tags: ["Files", "Security", "Storage"]
+  },
+  {
+    name: "21st.dev Magic",
+    description: "Create crafted UI components inspired by the best 21st.dev design engineers",
+    category: "Official Integrations",
+    type: "official",
+    tags: ["UI", "Components", "Design"]
+  },
+  {
+    name: "AgentQL",
+    description: "Enable AI agents to get structured data from unstructured web with AgentQL",
+    category: "Official Integrations",
+    type: "official", 
+    tags: ["Web", "Data", "Structured"]
+  },
+  {
+    name: "Apify",
+    description: "Actors MCP Server: Use 3,000+ pre-built cloud tools to extract data from websites",
+    category: "Official Integrations",
+    type: "official",
+    tags: ["Extraction", "Web", "Cloud"]
+  },
+  {
+    name: "Ableton Live",
+    description: "An MCP server to control Ableton Live",
+    category: "Community Servers",
+    type: "community",
+    tags: ["Music", "Audio", "DAW"]
+  },
+  {
+    name: "Airbnb",
+    description: "Provides tools to search Airbnb and get listing details",
+    category: "Community Servers",
+    type: "community",
+    tags: ["Travel", "Accommodation", "Search"]
+  }
+];
 
 const Index = () => {
   const featuredServers = getFeaturedServers();
@@ -53,6 +121,30 @@ const Index = () => {
       
       <main>
         <Hero />
+        
+        {/* MCP Server List */}
+        <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-white">
+          <div className="max-w-7xl mx-auto reveal-animation">
+            <h2 className="text-3xl font-bold mb-3">Model Context Protocol Servers</h2>
+            <p className="text-muted-foreground max-w-2xl mb-10">
+              Browse our collection of MCP servers categorized by type - reference implementations, official integrations, and community servers.
+            </p>
+            
+            <ServerTable 
+              servers={mcpServers} 
+              className="mb-8" 
+            />
+            
+            <div className="text-center mt-8">
+              <Button asChild variant="outline">
+                <Link to="/browse?category=mcp">
+                  View All MCP Servers
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
         
         {/* Browse by category */}
         <section className="py-20 px-4 md:px-8">
