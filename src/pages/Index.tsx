@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ServerGrid from '@/components/ServerGrid';
+import ServerCard from '@/components/ServerCard';
 import CategoryCard from '@/components/CategoryCard';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
