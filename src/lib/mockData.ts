@@ -1,3 +1,4 @@
+
 import { Search, Database, Server, Globe, Cpu, Code, Shield, Cloud, Zap, MessageSquare } from 'lucide-react';
 
 export interface ServerClient {
@@ -307,24 +308,53 @@ export const serverSetupInstructions: Record<string, {
     },
     license: "This MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository."
   },
-  "2": { // Brave Search
-    description: "An MCP server implementation for web and local search using Brave's Search API.",
+  "2": { 
+    description: "An MCP server implementation that integrates the Brave Search API, providing both web and local search capabilities.",
     features: [
-      "Web search: Search the web using Brave's Search API",
-      "Local search: Perform local searches within your content"
+      "Web Search: General queries, news, articles, with pagination and freshness controls",
+      "Local Search: Find businesses, restaurants, and services with detailed information",
+      "Flexible Filtering: Control result types, safety levels, and content freshness",
+      "Smart Fallbacks: Local search automatically falls back to web when no results are found"
     ],
     tools: [
       {
-        name: "brave_search",
-        description: "Perform web searches using Brave's Search API.",
+        name: "brave_web_search",
+        description: "Execute web searches with pagination and filtering.",
         inputs: [
-          { name: "query", type: "string", description: "The search query." },
-          { name: "count", type: "number", description: "Number of results to retrieve (default: 5).", optional: true }
+          { name: "query", type: "string", description: "Search terms." },
+          { name: "count", type: "number", description: "Results per page (max 20).", optional: true },
+          { name: "offset", type: "number", description: "Pagination offset (max 9).", optional: true }
+        ]
+      },
+      {
+        name: "brave_local_search",
+        description: "Search for local businesses and services. Automatically falls back to web search if no local results found.",
+        inputs: [
+          { name: "query", type: "string", description: "Local search terms." },
+          { name: "count", type: "number", description: "Number of results (max 20).", optional: true }
         ]
       }
     ],
-    configuration: "## Setting up Brave Search API\n\n- Sign up for Brave Search API at https://brave.com/search/api/\n- Obtain your API key from the developer dashboard\n- Configure environment variables as shown in the examples below",
+    configuration: "## Getting an API Key\n\n- Sign up for a Brave Search API account\n- Choose a plan (Free tier available with 2,000 queries/month)\n- Generate your API key from the developer dashboard",
     usageExamples: {
+      docker: `{
+  "mcpServers": {
+    "brave-search": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "BRAVE_API_KEY",
+        "mcp/brave-search"
+      ],
+      "env": {
+        "BRAVE_API_KEY": "YOUR_API_KEY_HERE"
+      }
+    }
+  }
+}`,
       npx: `{
   "mcpServers": {
     "brave-search": {
@@ -334,13 +364,13 @@ export const serverSetupInstructions: Record<string, {
         "@modelcontextprotocol/server-brave-search"
       ],
       "env": {
-        "BRAVE_API_KEY": "YOUR_BRAVE_API_KEY_HERE"
+        "BRAVE_API_KEY": "YOUR_API_KEY_HERE"
       }
     }
   }
 }`
     },
-    license: "This MCP server is licensed under the MIT License."
+    license: "This MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository."
   }
   // Additional servers can be added here following the same pattern
 };
