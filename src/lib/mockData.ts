@@ -805,3 +805,43 @@ export const serverSetupInstructions: Record<string, {
   }
   // Additional servers can be added here following the same pattern
 };
+
+// Add interface for Third Party Servers used in the ThirdPartyServers component
+export interface ThirdPartyServerProps {
+  name: string;
+  description: string;
+  github: string;
+  logo?: string;
+}
+
+// Add community servers to the list
+export const communityServers: ThirdPartyServerProps[] = [
+  {
+    name: "Ableton Live",
+    description: "An MCP server to control Ableton Live.",
+    github: "https://github.com/Simon-Kansara/ableton-live-mcp-server",
+    logo: "https://cdn-resources.ableton.com/resources/filer_public/2021/06/25/favicon.ico"
+  },
+  {
+    name: "Airbnb",
+    description: "Provides tools to search Airbnb and get listing details.",
+    github: "https://github.com/openbnb-org/mcp-server-airbnb",
+    logo: "https://a0.muscache.com/airbnb/static/icons/android-icon-192x192-c0465f9f0380893768972a31a614b670.png"
+  },
+  {
+    name: "Algorand",
+    description: "A comprehensive MCP server for tooling interactions (40+) and resource accessibility (60+) plus many useful prompts for interacting with the Algorand blockchain.",
+    github: "https://github.com/GoPlausible/algorand-mcp",
+    logo: "https://algorand.com/favicon.ico"
+  },
+  {
+    name: "Airflow",
+    description: "A MCP Server that connects to Apache Airflow using official python client.",
+    github: "https://github.com/yangkyeongmo/mcp-server-apache-airflow",
+    logo: "https://airflow.apache.org/favicon.ico"
+  },
+  {
+    name: "Airtable",
+    description: "Read and write access to Airtable databases, with schema inspection.",
+    github: "https://github.com/domdomegg/airtable-mcp-server",
+    logo: "https://air

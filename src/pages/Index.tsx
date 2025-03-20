@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -9,13 +8,16 @@ import ServerGrid from '@/components/ServerGrid';
 import ServerCard from '@/components/ServerCard';
 import CategoryCard from '@/components/CategoryCard';
 import ServerTable from '@/components/ServerTable';
+import ThirdPartyServers from '@/components/ThirdPartyServers';
+import CommunityServers from '@/components/CommunityServers';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
 import { 
   categories, 
   getFeaturedServers, 
   getLatestServers, 
-  getTopRatedServers 
+  getTopRatedServers,
+  communityServers
 } from '@/lib/mockData';
 import { cn } from '@/lib/utils';
 
@@ -139,6 +141,29 @@ const Index = () => {
               <Button asChild variant="outline">
                 <Link to="/browse?category=mcp">
                   View All MCP Servers
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+        
+        {/* Official Integrations */}
+        <section className="py-20 px-4 md:px-8">
+          <div className="max-w-7xl mx-auto reveal-animation">
+            <ThirdPartyServers />
+          </div>
+        </section>
+        
+        {/* Community Servers */}
+        <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-white">
+          <div className="max-w-7xl mx-auto reveal-animation">
+            <CommunityServers servers={communityServers.slice(0, 6)} />
+            
+            <div className="text-center mt-8">
+              <Button asChild variant="outline">
+                <Link to="/browse?type=community">
+                  View All Community Servers
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
