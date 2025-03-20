@@ -1,4 +1,3 @@
-
 import { Search, Database, Server, Globe, Cpu, Code, Shield, Cloud, Zap, MessageSquare } from 'lucide-react';
 
 export interface ServerClient {
@@ -110,130 +109,441 @@ export const servers: ServerClient[] = [
   },
   {
     id: '2',
-    name: 'PythonMCP',
-    description: 'A Python implementation of the MCP protocol with async support and extensive documentation.',
+    name: 'Brave Search',
+    description: 'Web and local search using Brave\'s Search API',
     type: 'server',
     category: 'server',
-    sdkType: ['python'],
+    sdkType: ['typescript', 'javascript'],
     stars: 378,
     rating: 4.7,
     reviewCount: 58,
-    tags: ['python', 'async', 'documentation'],
-    github: 'https://github.com/example/pythonmcp',
+    tags: ['search', 'web', 'local', 'brave'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search',
     createdAt: '2023-08-02',
     author: {
-      name: 'PythonMCP Org',
+      name: 'MCP Team',
       avatar: '/placeholder.svg'
     }
   },
   {
     id: '3',
-    name: 'MCPdb',
-    description: 'Database connector for MCP with support for PostgreSQL, MySQL, and MongoDB.',
-    type: 'client',
-    category: 'database',
-    sdkType: ['typescript', 'python'],
+    name: 'EverArt',
+    description: 'AI image generation using various models',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript', 'javascript'],
     stars: 289,
     rating: 4.5,
     reviewCount: 42,
-    tags: ['database', 'postgresql', 'mysql', 'mongodb'],
-    github: 'https://github.com/example/mcpdb',
+    tags: ['ai', 'image-generation', 'art'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/everart',
     createdAt: '2023-10-05',
     author: {
-      name: 'Database Tools Inc',
+      name: 'MCP Team',
       avatar: '/placeholder.svg'
     }
   },
   {
     id: '4',
-    name: 'ReactMCP',
-    description: 'A React client library for MCP with hooks and components for easy integration.',
-    type: 'client',
-    category: 'client',
-    sdkType: ['javascript', 'typescript'],
-    stars: 512,
-    rating: 4.9,
-    reviewCount: 76,
-    tags: ['react', 'hooks', 'frontend'],
-    github: 'https://github.com/example/reactmcp',
-    createdAt: '2023-11-20',
+    name: 'Everything',
+    description: 'Reference / test server with prompts, resources, and tools',
+    type: 'server',
+    category: 'server',
+    sdkType: ['typescript', 'javascript'],
+    stars: 210,
+    rating: 4.3,
+    reviewCount: 35,
+    tags: ['reference', 'test', 'prompts', 'tools'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/everything',
+    createdAt: '2023-07-10',
     author: {
-      name: 'React MCP Devs',
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    }
+  },
+  {
+    id: '5',
+    name: 'Fetch',
+    description: 'Web content fetching and conversion for efficient LLM usage',
+    type: 'server',
+    category: 'server',
+    sdkType: ['typescript', 'javascript'],
+    stars: 345,
+    rating: 4.6,
+    reviewCount: 50,
+    tags: ['web', 'fetch', 'content', 'conversion'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/fetch',
+    createdAt: '2023-09-12',
+    author: {
+      name: 'MCP Team',
       avatar: '/placeholder.svg'
     },
     featured: true
   },
   {
-    id: '5',
-    name: 'MCP AI Bridge',
-    description: 'Connect MCP servers to machine learning models with ease.',
-    type: 'server',
-    category: 'ai',
-    sdkType: ['python', 'typescript'],
-    stars: 346,
-    rating: 4.6,
-    reviewCount: 39,
-    tags: ['ai', 'machine-learning', 'tensorflow'],
-    github: 'https://github.com/example/mcp-ai-bridge',
-    createdAt: '2023-12-01',
-    author: {
-      name: 'AI Tools Group',
-      avatar: '/placeholder.svg'
-    }
-  },
-  {
     id: '6',
-    name: 'GoMCP',
-    description: 'High-performance Go implementation of MCP protocol with zero dependencies.',
+    name: 'Filesystem',
+    description: 'Secure file operations with configurable access controls',
     type: 'server',
     category: 'server',
-    sdkType: ['go'],
-    stars: 409,
-    rating: 4.7,
-    reviewCount: 52,
-    tags: ['go', 'performance', 'lightweight'],
-    github: 'https://github.com/example/gomcp',
-    createdAt: '2023-07-12',
+    sdkType: ['typescript', 'javascript'],
+    stars: 276,
+    rating: 4.4,
+    reviewCount: 38,
+    tags: ['filesystem', 'files', 'security', 'access-control'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem',
+    createdAt: '2023-08-15',
     author: {
-      name: 'GoMCP Team',
+      name: 'MCP Team',
       avatar: '/placeholder.svg'
     }
   },
   {
     id: '7',
-    name: 'MCP Auth',
-    description: 'Authentication and authorization solution for MCP servers with JWT support.',
-    type: 'client',
-    category: 'security',
-    sdkType: ['typescript', 'javascript', 'python'],
-    stars: 287,
-    rating: 4.4,
-    reviewCount: 34,
-    tags: ['authentication', 'jwt', 'security'],
-    github: 'https://github.com/example/mcp-auth',
-    createdAt: '2023-10-18',
+    name: 'Git',
+    description: 'Tools to read, search, and manipulate Git repositories',
+    type: 'server',
+    category: 'server',
+    sdkType: ['typescript', 'javascript'],
+    stars: 401,
+    rating: 4.7,
+    reviewCount: 62,
+    tags: ['git', 'repository', 'version-control'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/git',
+    createdAt: '2023-11-05',
     author: {
-      name: 'Security Systems',
+      name: 'MCP Team',
       avatar: '/placeholder.svg'
     }
   },
   {
     id: '8',
-    name: 'MCP Cloud',
-    description: 'Deploy MCP servers to major cloud providers with a single command.',
+    name: 'GitHub',
+    description: 'Repository management, file operations, and GitHub API integration',
+    type: 'server',
+    category: 'server',
+    sdkType: ['typescript', 'javascript'],
+    stars: 450,
+    rating: 4.8,
+    reviewCount: 70,
+    tags: ['github', 'repository', 'api', 'integration'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/github',
+    createdAt: '2023-10-20',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: '9',
+    name: 'GitLab',
+    description: 'GitLab API, enabling project management',
+    type: 'server',
+    category: 'server',
+    sdkType: ['typescript', 'javascript'],
+    stars: 310,
+    rating: 4.5,
+    reviewCount: 45,
+    tags: ['gitlab', 'repository', 'api', 'project-management'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/gitlab',
+    createdAt: '2023-11-15',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    }
+  },
+  {
+    id: '10',
+    name: 'Google Drive',
+    description: 'File access and search capabilities for Google Drive',
     type: 'server',
     category: 'cloud',
     sdkType: ['typescript', 'javascript'],
-    stars: 321,
+    stars: 385,
     rating: 4.6,
-    reviewCount: 48,
-    tags: ['cloud', 'aws', 'azure', 'gcp'],
-    github: 'https://github.com/example/mcp-cloud',
-    createdAt: '2023-11-05',
+    reviewCount: 56,
+    tags: ['google', 'drive', 'files', 'search'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/gdrive',
+    createdAt: '2023-12-01',
     author: {
-      name: 'Cloud Deployment Team',
+      name: 'MCP Team',
       avatar: '/placeholder.svg'
     }
+  },
+  {
+    id: '11',
+    name: 'Google Maps',
+    description: 'Location services, directions, and place details',
+    type: 'server',
+    category: 'server',
+    sdkType: ['typescript', 'javascript'],
+    stars: 325,
+    rating: 4.5,
+    reviewCount: 48,
+    tags: ['google', 'maps', 'location', 'directions'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/google-maps',
+    createdAt: '2023-11-28',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    }
+  },
+  {
+    id: '12',
+    name: 'Memory',
+    description: 'Knowledge graph-based persistent memory system',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript', 'javascript'],
+    stars: 420,
+    rating: 4.7,
+    reviewCount: 63,
+    tags: ['memory', 'knowledge-graph', 'persistence'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/memory',
+    createdAt: '2023-10-10',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: '13',
+    name: 'PostgreSQL',
+    description: 'Read-only database access with schema inspection',
+    type: 'server',
+    category: 'database',
+    sdkType: ['typescript', 'javascript'],
+    stars: 356,
+    rating: 4.6,
+    reviewCount: 52,
+    tags: ['postgresql', 'database', 'schema'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/postgres',
+    createdAt: '2023-09-25',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    }
+  },
+  {
+    id: '14',
+    name: 'Puppeteer',
+    description: 'Browser automation and web scraping',
+    type: 'server',
+    category: 'server',
+    sdkType: ['typescript', 'javascript'],
+    stars: 392,
+    rating: 4.7,
+    reviewCount: 58,
+    tags: ['puppeteer', 'browser', 'automation', 'scraping'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer',
+    createdAt: '2023-10-15',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    }
+  },
+  {
+    id: '15',
+    name: 'Redis',
+    description: 'Interact with Redis key-value stores',
+    type: 'server',
+    category: 'database',
+    sdkType: ['typescript', 'javascript'],
+    stars: 295,
+    rating: 4.5,
+    reviewCount: 42,
+    tags: ['redis', 'database', 'key-value'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/redis',
+    createdAt: '2023-11-10',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    }
+  },
+  {
+    id: '16',
+    name: 'Sentry',
+    description: 'Retrieving and analyzing issues from Sentry.io',
+    type: 'server',
+    category: 'server',
+    sdkType: ['typescript', 'javascript'],
+    stars: 275,
+    rating: 4.4,
+    reviewCount: 38,
+    tags: ['sentry', 'error-tracking', 'analysis'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/sentry',
+    createdAt: '2023-12-05',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    }
+  },
+  {
+    id: '17',
+    name: 'Sequential Thinking',
+    description: 'Dynamic and reflective problem-solving through thought sequences',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript', 'javascript'],
+    stars: 340,
+    rating: 4.6,
+    reviewCount: 50,
+    tags: ['thinking', 'problem-solving', 'reasoning'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking',
+    createdAt: '2023-11-20',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    }
+  },
+  {
+    id: '18',
+    name: 'Slack',
+    description: 'Channel management and messaging capabilities',
+    type: 'server',
+    category: 'server',
+    sdkType: ['typescript', 'javascript'],
+    stars: 315,
+    rating: 4.5,
+    reviewCount: 46,
+    tags: ['slack', 'messaging', 'channels'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/slack',
+    createdAt: '2023-10-25',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    }
+  },
+  {
+    id: '19',
+    name: 'Sqlite',
+    description: 'Database interaction and business intelligence capabilities',
+    type: 'server',
+    category: 'database',
+    sdkType: ['typescript', 'javascript'],
+    stars: 280,
+    rating: 4.4,
+    reviewCount: 40,
+    tags: ['sqlite', 'database', 'business-intelligence'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/sqlite',
+    createdAt: '2023-11-25',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    }
+  },
+  {
+    id: '20',
+    name: 'Time',
+    description: 'Time and timezone conversion capabilities',
+    type: 'server',
+    category: 'server',
+    sdkType: ['typescript', 'javascript'],
+    stars: 250,
+    rating: 4.3,
+    reviewCount: 36,
+    tags: ['time', 'timezone', 'conversion'],
+    github: 'https://github.com/modelcontextprotocol/servers/tree/main/src/time',
+    createdAt: '2023-08-20',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    }
+  },
+  // Third party servers
+  {
+    id: '21',
+    name: '21st.dev Magic',
+    description: 'Create crafted UI components inspired by the best 21st.dev design engineers.',
+    type: 'server',
+    category: 'client',
+    sdkType: ['typescript', 'javascript'],
+    stars: 330,
+    rating: 4.6,
+    reviewCount: 48,
+    tags: ['ui', 'components', 'design'],
+    github: 'https://github.com/21st-dev/magic-mcp',
+    createdAt: '2024-01-05',
+    author: {
+      name: '21st.dev',
+      avatar: '/placeholder.svg'
+    }
+  },
+  {
+    id: '22',
+    name: 'AgentQL',
+    description: 'Enable AI agents to get structured data from unstructured web with AgentQL.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript', 'javascript'],
+    stars: 365,
+    rating: 4.6,
+    reviewCount: 53,
+    tags: ['ai', 'structured-data', 'web'],
+    github: 'https://github.com/tinyfish-io/agentql-mcp',
+    createdAt: '2024-01-10',
+    author: {
+      name: 'AgentQL',
+      avatar: '/placeholder.svg'
+    }
+  },
+  {
+    id: '23',
+    name: 'Perplexity',
+    description: 'An MCP server that connects to Perplexity\'s Sonar API, enabling real-time web-wide research in conversational AI.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript', 'javascript'],
+    stars: 485,
+    rating: 4.9,
+    reviewCount: 72,
+    tags: ['perplexity', 'sonar', 'research', 'conversational-ai'],
+    github: 'https://github.com/ppl-ai/modelcontextprotocol',
+    createdAt: '2024-02-15',
+    author: {
+      name: 'Perplexity',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: '24',
+    name: 'Firecrawl',
+    description: 'Extract web data with Firecrawl',
+    type: 'server',
+    category: 'server',
+    sdkType: ['typescript', 'javascript'],
+    stars: 320,
+    rating: 4.5,
+    reviewCount: 47,
+    tags: ['web', 'data-extraction', 'crawling'],
+    github: 'https://github.com/mendableai/firecrawl-mcp-server',
+    createdAt: '2024-01-20',
+    author: {
+      name: 'Mendable AI',
+      avatar: '/placeholder.svg'
+    }
+  },
+  {
+    id: '25',
+    name: 'Exa',
+    description: 'Search Engine made for AIs by Exa',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript', 'javascript'],
+    stars: 410,
+    rating: 4.7,
+    reviewCount: 61,
+    tags: ['search', 'ai', 'engine'],
+    github: 'https://github.com/exa-labs/exa-mcp-server',
+    createdAt: '2024-02-05',
+    author: {
+      name: 'Exa Labs',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
   }
 ];
 
@@ -365,6 +675,127 @@ export const serverSetupInstructions: Record<string, {
       ],
       "env": {
         "BRAVE_API_KEY": "YOUR_API_KEY_HERE"
+      }
+    }
+  }
+}`
+    },
+    license: "This MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository."
+  },
+  "23": {
+    description: "An MCP server that connects to Perplexity's Sonar API, enabling real-time web-wide research in conversational AI.",
+    features: [
+      "Web Search: Perform web searches with high accuracy and relevance",
+      "Real-time Results: Get up-to-date information from across the web",
+      "Conversational Format: Results formatted for seamless integration into AI conversations",
+      "Comprehensive Coverage: Access information from a wide range of sources"
+    ],
+    tools: [
+      {
+        name: "perplexity_search",
+        description: "Search the web using Perplexity's Sonar API.",
+        inputs: [
+          { name: "query", type: "string", description: "The search query." },
+          { name: "max_results", type: "number", description: "Maximum number of results to return (default: 5).", optional: true },
+          { name: "search_depth", type: "string", description: "Depth of search (basic, medium, deep).", optional: true }
+        ]
+      }
+    ],
+    configuration: "## Getting a Perplexity API Key\n\n- Sign up for a Perplexity developer account\n- Navigate to your dashboard to generate an API key\n- Store your API key securely",
+    usageExamples: {
+      docker: `{
+  "mcpServers": {
+    "perplexity": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "PERPLEXITY_API_KEY",
+        "mcp/perplexity"
+      ],
+      "env": {
+        "PERPLEXITY_API_KEY": "YOUR_API_KEY_HERE"
+      }
+    }
+  }
+}`,
+      npx: `{
+  "mcpServers": {
+    "perplexity": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-perplexity"
+      ],
+      "env": {
+        "PERPLEXITY_API_KEY": "YOUR_API_KEY_HERE"
+      }
+    }
+  }
+}`
+    },
+    license: "This MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository."
+  },
+  "24": {
+    description: "Extract web data with Firecrawl - a powerful web crawling and extraction service for AI agents.",
+    features: [
+      "Web Crawling: Crawl websites and extract structured data",
+      "Content Conversion: Convert web pages to clean, AI-friendly formats",
+      "Rate Limiting: Smart throttling to avoid overloading target websites",
+      "JavaScript Rendering: Process JavaScript-heavy websites accurately"
+    ],
+    tools: [
+      {
+        name: "firecrawl_extract",
+        description: "Extract data from a specific URL.",
+        inputs: [
+          { name: "url", type: "string", description: "The URL to extract data from." },
+          { name: "format", type: "string", description: "Output format (markdown, html, text).", optional: true },
+          { name: "depth", type: "number", description: "Crawl depth (1-3).", optional: true }
+        ]
+      },
+      {
+        name: "firecrawl_search",
+        description: "Search within a website domain.",
+        inputs: [
+          { name: "domain", type: "string", description: "The website domain to search within." },
+          { name: "query", type: "string", description: "Search query." },
+          { name: "max_results", type: "number", description: "Maximum number of results to return.", optional: true }
+        ]
+      }
+    ],
+    configuration: "## Setting up Firecrawl\n\n- Sign up for a Firecrawl account at firecrawl.dev\n- Navigate to the API section to generate your API key\n- Set your API key as an environment variable as shown in the examples",
+    usageExamples: {
+      docker: `{
+  "mcpServers": {
+    "firecrawl": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "FIRECRAWL_API_KEY",
+        "mcp/firecrawl"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": "YOUR_API_KEY_HERE"
+      }
+    }
+  }
+}`,
+      npx: `{
+  "mcpServers": {
+    "firecrawl": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-firecrawl"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": "YOUR_API_KEY_HERE"
       }
     }
   }
