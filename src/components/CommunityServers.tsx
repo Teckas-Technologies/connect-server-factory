@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { communityServers } from '@/lib/communityServers';
 
 interface CommunityServerProps {
   name: string;
@@ -53,10 +54,10 @@ const CommunityServer: React.FC<CommunityServerProps> = ({
 
 interface CommunityServersProps {
   className?: string;
-  servers: CommunityServerProps[];
+  servers?: CommunityServerProps[];
 }
 
-const CommunityServers: React.FC<CommunityServersProps> = ({ className, servers }) => {
+const CommunityServers: React.FC<CommunityServersProps> = ({ className, servers = communityServers }) => {
   return (
     <div className={className}>
       <div className="mb-6">

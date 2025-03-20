@@ -844,4 +844,3 @@ export const communityServers: ThirdPartyServerProps[] = [
     name: "Airtable",
     description: "Read and write access to Airtable databases, with schema inspection.",
     github: "https://github.com/domdomegg/airtable-mcp-server",
-    logo: "
