@@ -23,11 +23,11 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, featured = false, class
       )}
     >
       <div className="relative p-6">
-        {featured && (
+        {/* {featured && (
           <div className="absolute top-3 right-3">
             <Badge variant="default" className="bg-primary/90 hover:bg-primary">Featured</Badge>
           </div>
-        )}
+        )} */}
         
         <div className="flex items-start justify-between mb-4">
           <div className="flex flex-col">

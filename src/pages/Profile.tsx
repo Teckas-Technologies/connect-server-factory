@@ -29,7 +29,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen py-20 px-4 md:px-8">
+    <div className="min-h-screen py-20 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-white">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold mb-4">Profile</h1>
         <p className="text-muted-foreground mb-8">
@@ -78,7 +78,7 @@ const Profile = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button variant="outline" onClick={() => navigate('/settings')}>
+              <Button variant="outline" onClick={() => navigate('/settings')} className="hover:bg-blue-600 hover:text-white transition-colors duration-300">
                 Go to Settings
               </Button>
             </CardContent>

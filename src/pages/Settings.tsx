@@ -29,7 +29,7 @@ const Settings = () => {
   }
 
   return (
-    <div className="min-h-screen py-20 px-4 md:px-8">
+    <div className="min-h-screen py-20 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-white">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold mb-4">Settings</h1>
         <p className="text-muted-foreground mb-8">
@@ -50,7 +50,7 @@ const Settings = () => {
                   <label className="text-sm font-medium">Email</label>
                   <p className="text-muted-foreground">{user.email}</p>
                 </div>
-                <Button variant="outline">Change Email</Button>
+                <Button variant="outline" className="hover:bg-blue-600 hover:text-white transition-colors duration-300">Change Email</Button>
               </div>
             </CardContent>
           </Card>
@@ -64,8 +64,8 @@ const Settings = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <Button variant="outline">Change Password</Button>
-                <Button variant="outline">Two-Factor Authentication</Button>
+                <Button variant="outline" className="hover:bg-blue-600 hover:text-white transition-colors duration-300">Change Password</Button>
+                <Button variant="outline" className="hover:bg-blue-600 hover:text-white transition-colors duration-300">Two-Factor Authentication</Button>
               </div>
             </CardContent>
           </Card>
@@ -86,7 +86,7 @@ const Settings = () => {
                       Receive updates about your projects and account
                     </p>
                   </div>
-                  <Button variant="outline">Configure</Button>
+                  <Button variant="outline" className="hover:bg-blue-600 hover:text-white transition-colors duration-300">Configure</Button>
                 </div>
               </div>
             </CardContent>
