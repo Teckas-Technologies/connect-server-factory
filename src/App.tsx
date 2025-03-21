@@ -1,36 +1,42 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from '@/contexts/AuthContext';
+import Index from '@/pages/Index';
+import SignIn from '@/pages/SignIn';
+import SignUp from '@/pages/SignUp';
+import ServerDetail from '@/pages/ServerDetail';
+import Browse from '@/pages/Browse';
+import Submit from '@/pages/Submit';
+import Docs from '@/pages/Docs';
+import Profile from '@/pages/Profile';
+import Settings from '@/pages/Settings';
+import NotFound from '@/pages/NotFound';
+import AuthCallback from '@/pages/AuthCallback';
+import EnvTest from '@/components/EnvTest';
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import Browse from "./pages/Browse";
-import ServerDetail from "./pages/ServerDetail";
-import ServerSetup from "./pages/ServerSetup";
-import Auth from "./pages/Auth";
-import NotFound from "./pages/NotFound";
-
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/browse" element={<Browse />} />
-          <Route path="/server/:id" element={<ServerDetail />} />
-          <Route path="/server/:id/setup" element={<ServerSetup />} />
-          <Route path="/auth" element={<Auth />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  return (
+    <>
+      <EnvTest />
+      <Router>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/server/:id" element={<ServerDetail />} />
+            <Route path="/browse" element={<Browse />} />
+            <Route path="/submit" element={<Submit />} />
+            <Route path="/docs" element={<Docs />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/auth/callback" element={<AuthCallback />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AuthProvider>
+      </Router>
+    </>
+  );
+};
 
 export default App;

@@ -840,7 +840,4 @@ export const communityServers: ThirdPartyServerProps[] = [
     github: "https://github.com/yangkyeongmo/mcp-server-apache-airflow",
     logo: "https://airflow.apache.org/favicon.ico"
   },
-  {
-    name: "Airtable",
-    description: "Read and write access to Airtable databases, with schema inspection.",
-    github: "https://github.com/domdomegg/airtable-mcp-server",
+]

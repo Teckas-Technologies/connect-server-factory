@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Star, Clock, TrendingUp, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
@@ -124,59 +124,12 @@ const Index = () => {
       <main>
         <Hero />
         
-        {/* MCP Server List */}
-        <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-white">
-          <div className="max-w-7xl mx-auto reveal-animation">
-            <h2 className="text-3xl font-bold mb-3">Model Context Protocol Servers</h2>
-            <p className="text-muted-foreground max-w-2xl mb-10">
-              Browse our collection of MCP servers categorized by type - reference implementations, official integrations, and community servers.
-            </p>
-            
-            <ServerTable 
-              servers={mcpServers} 
-              className="mb-8" 
-            />
-            
-            <div className="text-center mt-8">
-              <Button asChild variant="outline">
-                <Link to="/browse?category=mcp">
-                  View All MCP Servers
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-        
-        {/* Official Integrations */}
-        <section className="py-20 px-4 md:px-8">
-          <div className="max-w-7xl mx-auto reveal-animation">
-            <ThirdPartyServers />
-          </div>
-        </section>
-        
-        {/* Community Servers */}
-        <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-white">
-          <div className="max-w-7xl mx-auto reveal-animation">
-            <CommunityServers servers={communityServers.slice(0, 6)} />
-            
-            <div className="text-center mt-8">
-              <Button asChild variant="outline">
-                <Link to="/browse?type=community">
-                  View All Community Servers
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-        
-        {/* Browse by category */}
+        {/* Popular Categories */}
         <section className="py-20 px-4 md:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 reveal-animation">
               <div>
-                <h2 className="text-3xl font-bold mb-3">Browse by Category</h2>
+                <h2 className="text-3xl font-bold mb-3">Popular Categories</h2>
                 <p className="text-muted-foreground max-w-2xl">
                   Explore our collection of MCP servers and clients organized by category to find exactly what you need.
                 </p>
@@ -197,11 +150,14 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Featured servers/clients */}
+        {/* Featured Servers */}
         {featuredServers.length > 0 && (
           <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-white">
             <div className="max-w-7xl mx-auto reveal-animation">
-              <h2 className="text-3xl font-bold mb-3">Featured Servers & Clients</h2>
+              <div className="flex items-center gap-2 mb-6">
+                <Sparkles className="h-5 w-5 text-primary" />
+                <h2 className="text-3xl font-bold">Featured Servers & Clients</h2>
+              </div>
               <p className="text-muted-foreground max-w-2xl mb-10">
                 Discover our handpicked selection of the best MCP servers and clients available in the marketplace.
               </p>
@@ -216,14 +172,9 @@ const Index = () => {
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               <div className="reveal-animation">
-                <div className="flex items-end justify-between mb-8">
+                <div className="flex items-center gap-2 mb-8">
+                  <Clock className="h-5 w-5 text-primary" />
                   <h2 className="text-2xl font-bold">Latest Additions</h2>
-                  <Button asChild variant="ghost" size="sm">
-                    <Link to="/browse?sort=latest" className="text-primary">
-                      View all
-                      <ArrowRight className="ml-1 h-3 w-3" />
-                    </Link>
-                  </Button>
                 </div>
                 
                 <div className="space-y-4">
@@ -232,7 +183,7 @@ const Index = () => {
                       key={server.id} 
                       className={cn(
                         "flex p-4 rounded-lg border border-border/40 bg-white shadow-sm",
-                        "hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+                        "hover:shadow-md transition-smooth duration-300 hover:-translate-y-1"
                       )}
                     >
                       <div className="flex-1 mr-4">
@@ -255,14 +206,9 @@ const Index = () => {
               </div>
               
               <div className="reveal-animation">
-                <div className="flex items-end justify-between mb-8">
+                <div className="flex items-center gap-2 mb-8">
+                  <TrendingUp className="h-5 w-5 text-primary" />
                   <h2 className="text-2xl font-bold">Top Rated</h2>
-                  <Button asChild variant="ghost" size="sm">
-                    <Link to="/browse?sort=rating" className="text-primary">
-                      View all
-                      <ArrowRight className="ml-1 h-3 w-3" />
-                    </Link>
-                  </Button>
                 </div>
                 
                 <div className="grid gap-6">
@@ -275,9 +221,38 @@ const Index = () => {
           </div>
         </section>
         
+        {/* Community Servers */}
+        <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-white">
+          <div className="max-w-7xl mx-auto reveal-animation">
+            <div className="flex items-center gap-2 mb-6">
+              <Star className="h-5 w-5 text-primary" />
+              <h2 className="text-3xl font-bold">Community Servers</h2>
+            </div>
+            <p className="text-muted-foreground max-w-2xl mb-10">
+              Explore servers created and maintained by the MCP community.
+            </p>
+            
+            <CommunityServers servers={communityServers.slice(0, 6)} />
+            
+            <div className="text-center mt-8">
+              <Button asChild variant="outline">
+                <Link to="/browse?type=community">
+                  View All Community Servers
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+        
         {/* CTA Section */}
         <section className="py-20 px-4 md:px-8 bg-primary/5">
           <div className="max-w-3xl mx-auto text-center reveal-animation">
+            <div className="inline-block mb-6">
+              <div className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                Join the Community
+              </div>
+            </div>
             <h2 className="text-3xl font-bold mb-4">Have an MCP Server or Client?</h2>
             <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
               Share your creation with the community. Submit your MCP server or client to the marketplace and reach thousands of developers.

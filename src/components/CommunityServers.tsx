@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { ExternalLink } from 'lucide-react';
@@ -19,7 +18,7 @@ const CommunityServer: React.FC<CommunityServerProps> = ({
   logo 
 }) => {
   return (
-    <Card className="transition-all duration-300 hover:shadow-md">
+    <Card className="transition-smooth duration-300 hover:shadow-md">
       <CardContent className="p-4">
         <div className="flex items-start space-x-3">
           {logo && (

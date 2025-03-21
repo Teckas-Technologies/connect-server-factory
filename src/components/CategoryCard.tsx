@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { type Category } from '@/lib/mockData';
@@ -14,16 +13,16 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, className }) => {
     <Link 
       to={`/browse?category=${category.id}`}
       className={cn(
-        "group block p-6 rounded-xl bg-white border border-border/40 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1",
+        "group block p-6 rounded-xl bg-white border border-border/40 shadow-sm hover:shadow-md transition-smooth hover:-translate-y-1",
         className
       )}
     >
       <div className="flex flex-col h-full">
-        <div className="size-12 mb-4 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+        <div className="size-12 mb-4 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors-smooth">
           <category.icon className="size-6" />
         </div>
         
-        <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+        <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors-smooth">
           {category.name}
         </h3>
         

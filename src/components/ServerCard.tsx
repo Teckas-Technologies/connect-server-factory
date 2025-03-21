@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Star, ArrowUpRight, Heart } from 'lucide-react';
@@ -17,7 +16,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, featured = false, class
   return (
     <div 
       className={cn(
-        "group overflow-hidden rounded-xl border border-border/40 bg-white transition-all duration-300",
+        "group overflow-hidden rounded-xl border border-border/40 bg-white transition-smooth duration-300",
         featured ? "shadow-md hover:shadow-lg" : "shadow-sm hover:shadow-md",
         featured ? "-translate-y-1 hover:-translate-y-2" : "hover:-translate-y-1",
         className
@@ -32,7 +31,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, featured = false, class
         
         <div className="flex items-start justify-between mb-4">
           <div className="flex flex-col">
-            <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">
+            <h3 className="text-lg font-semibold group-hover:text-primary transition-colors-smooth">
               {server.name}
             </h3>
             <div className="flex items-center mt-1 text-sm text-muted-foreground">
