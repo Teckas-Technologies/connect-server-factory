@@ -149,7 +149,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
         options: {
-          redirectTo: 'https://xbkglfkyuxslvyuduyym.supabase.co/auth/v1/callback',
+          redirectTo: import.meta.env.VITE_SUPABASE_ANON_KEY,
           skipBrowserRedirect: false
         }
       });
