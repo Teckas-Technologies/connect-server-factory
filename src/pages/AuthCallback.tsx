@@ -11,65 +11,74 @@ const AuthCallback = () => {
         console.log('=== Auth Callback Started ===');
         const currentUrl = window.location.href;
         console.log('Current URL:', currentUrl);
-        
-        // Get the code from the URL
-        const params = new URLSearchParams(window.location.search);
-        const code = params.get('code');
-        
-        if (!code) {
-          console.error('No code found in URL');
-          throw new Error('No code found in URL');
-        }
 
-        console.log('Found code:', code);
+        // First check if we have a session already
+        const { data: { session: currentSession } } = await supabase.auth.getSession();
+        console.log('Current session:', currentSession ? 'exists' : 'none');
 
-        // Try to get the current session first
-        try {
-          const { data: { session: currentSession }, error: sessionError } = await supabase.auth.getSession();
-          console.log('Current session check:', sessionError ? 'Error' : (currentSession ? 'Has session' : 'No session'));
-          if (sessionError) {
-            console.error('Session check error:', sessionError);
-          }
-        } catch (sessionError) {
-          console.error('Failed to check current session:', sessionError);
-        }
-
-        // Exchange the code
-        console.log('Attempting code exchange...');
-        try {
-          const { data, error } = await supabase.auth.exchangeCodeForSession(code);
-          
-          if (error) {
-            console.error('Code exchange error:', error);
-            throw error;
-          }
-
-          if (!data?.session) {
-            console.error('No session in exchange response');
-            throw new Error('No session received');
-          }
-
-          console.log('Session established successfully');
-          console.log('Session info:', {
-            userId: data.session.user.id,
-            expiresAt: data.session.expires_at
-          });
-          
-          // Force a full page reload to ensure fresh state
+        if (currentSession) {
+          console.log('Already have a session, redirecting to home');
           window.location.href = '/';
           return;
-        } catch (exchangeError) {
-          console.error('Code exchange failed:', exchangeError);
-          throw exchangeError;
         }
+
+        // Check for hash fragment (implicit flow)
+        const hashParams = new URLSearchParams(window.location.hash.replace('#', ''));
+        const accessToken = hashParams.get('access_token');
+        const refreshToken = hashParams.get('refresh_token');
+
+        if (accessToken) {
+          console.log('Found access token in hash, setting session...');
+          const { data: { session }, error: sessionError } = await supabase.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken || undefined
+          });
+
+          if (sessionError) {
+            console.error('Error setting session:', sessionError);
+            throw sessionError;
+          }
+
+          if (session) {
+            console.log('Session established from hash');
+            window.location.href = '/';
+            return;
+          }
+        }
+
+        // If no hash tokens, try code exchange
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+
+        if (!code) {
+          console.error('No authentication data found');
+          throw new Error('No authentication data found');
+        }
+
+        console.log('Found code, attempting exchange...');
+        const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+
+        if (error) {
+          console.error('Code exchange error:', error);
+          throw error;
+        }
+
+        if (!data?.session) {
+          console.error('No session in exchange response');
+          throw new Error('No session received');
+        }
+
+        console.log('Session established successfully');
+        console.log('User:', data.session.user.email);
+        window.location.href = '/';
       } catch (error) {
         console.error('=== Auth Callback Error ===');
         console.error('Error type:', error.constructor.name);
         console.error('Error message:', error.message);
-        console.error('Full error:', error);
+        console.error('Stack:', error.stack);
         console.error('==========================');
         
-        // Add a small delay to ensure logs are visible
+        // Add a delay to ensure logs are visible
         await new Promise(resolve => setTimeout(resolve, 1000));
         navigate('/signin', { replace: true });
       }

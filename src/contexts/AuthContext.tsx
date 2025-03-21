@@ -149,9 +149,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
-          skipBrowserRedirect: false,
-          scopes: 'read:user user:email'
+          redirectTo: 'https://xbkglfkyuxslvyuduyym.supabase.co/auth/v1/callback',
+          skipBrowserRedirect: false
         }
       });
 
@@ -160,8 +159,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         throw error;
       }
 
-      // No need to handle the response as Supabase will redirect
-      console.log('OAuth initiated successfully');
+      console.log('OAuth flow initiated:', data);
     } catch (err) {
       console.error('GitHub sign in error:', err);
       setError(err instanceof Error ? err.message : 'An error occurred during GitHub sign in');

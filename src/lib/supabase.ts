@@ -2,49 +2,48 @@ import { createClient } from '@supabase/supabase-js';
 
 // Get environment variables
 const supabaseUrl = 'https://xbkglfkyuxslvyuduyym.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhia2dsZmt5dXhzbHZ5dWR1eXltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDc5MjA1NzAsImV4cCI6MjAyMzQ5NjU3MH0.7_XMHgwG9fwqYrKVBHHYXu3z2i9Hs5jsVgqVvFBv0Oc';
 
-// Debug environment variables
+// Debug configuration
 console.log('=== Supabase Configuration ===');
 console.log('URL:', supabaseUrl);
-console.log('Raw key:', supabaseAnonKey); // Temporarily log the full key for debugging
+console.log('Key length:', supabaseAnonKey.length);
 console.log('============================');
 
-// Validate environment variables
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables');
-}
-
-// Create the client with environment variables
+// Create the client
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: true,
-    flowType: 'pkce',
-    debug: true,
     storage: window.localStorage,
-    storageKey: 'supabase.auth.token'
+    storageKey: 'supabase.auth.token',
+    flowType: 'implicit'
   }
 });
 
-// Test the client configuration immediately
-const testConnection = async () => {
+// Test auth configuration
+const testAuth = async () => {
   try {
-    const { error } = await supabase.auth.getSession();
+    console.log('=== Testing Auth Configuration ===');
+    const { data, error } = await supabase.auth.getSession();
+    
     if (error) {
-      console.error('Supabase connection test failed:', error);
+      console.error('Auth configuration error:', error);
     } else {
-      console.log('Supabase connection test successful');
+      console.log('Auth configuration successful');
+      console.log('Current session:', data.session ? 'Active' : 'None');
     }
+    console.log('===============================');
   } catch (error) {
-    console.error('Supabase connection test error:', error);
+    console.error('Auth test error:', error);
   }
 };
 
-testConnection();
+// Run auth test
+testAuth();
 
-// Export a function to get the current session
+// Export session getter
 export const getCurrentSession = async () => {
   try {
     const { data: { session }, error } = await supabase.auth.getSession();
