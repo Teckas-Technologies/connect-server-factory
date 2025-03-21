@@ -544,6 +544,329 @@ export const servers: ServerClient[] = [
       avatar: '/placeholder.svg'
     },
     featured: true
+  },
+  {
+    id: '1',
+    name: 'Adfin',
+    description: 'The only platform you need to get paid - all payments in one place, invoicing and accounting reconciliations with Adfin.',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['typescript', 'javascript'],
+    stars: 320,
+    rating: 4.7,
+    reviewCount: 50,
+    tags: ['payments', 'invoicing', 'accounting', 'cloud'],
+    github: 'https://github.com/Adfin-Engineering/mcp-server-adfin.git',
+    createdAt: '2023-11-10',
+    author: {
+      name: 'Adfin Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: '2',
+    name: 'AgentQL',
+    description: 'Enable AI agents to get structured data from unstructured web with AgentQL.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript', 'javascript'],
+    stars: 415,
+    rating: 4.8,
+    reviewCount: 66,
+    tags: ['ai', 'data', 'web', 'agents'],
+    github: 'https://github.com/tinyfish-io/agentql-mcp.git',
+    createdAt: '2023-10-18',
+    author: {
+      name: 'AgentQL Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: '3',
+    name: 'AgentRPC',
+    description: 'Connect to any function, any language, across network boundaries using AgentRPC.',
+    type: 'server',
+    category: 'sdk',
+    sdkType: ['typescript', 'javascript', 'python'],
+    stars: 388,
+    rating: 4.6,
+    reviewCount: 54,
+    tags: ['rpc', 'network', 'function', 'sdk'],
+    github: 'https://github.com/agentrpc/agentrpc.git',
+    createdAt: '2023-09-20',
+    author: {
+      name: 'AgentRPC Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: '4',
+    name: 'Apify',
+    description: 'Use 3,000+ pre-built cloud tools to extract data from websites, e-commerce, social media, search engines, maps, and more.',
+    type: 'server',
+    category: 'client',
+    sdkType: ['javascript'],
+    stars: 512,
+    rating: 4.9,
+    reviewCount: 80,
+    tags: ['web', 'data', 'automation'],
+    github: 'https://github.com/apify/actors-mcp-server.git',
+    createdAt: '2023-08-12',
+    author: {
+      name: 'Apify Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: '5',
+    name: 'Audiense Insights',
+    description: 'Marketing insights and audience analysis from Audiense reports, covering demographic, cultural, influencer, and content engagement analysis.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript', 'javascript'],
+    stars: 270,
+    rating: 4.5,
+    reviewCount: 42,
+    tags: ['marketing', 'insights', 'audience'],
+    github: 'https://github.com/AudienseCo/mcp-audiense-insights.git',
+    createdAt: '2023-07-05',
+    author: {
+      name: 'Audiense Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: '6',
+    name: 'Axiom',
+    description: 'Query and analyze your Axiom logs, traces, and all other event data in natural language.',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['typescript', 'javascript'],
+    stars: 355,
+    rating: 4.7,
+    reviewCount: 60,
+    tags: ['logs', 'analytics', 'query'],
+    github: 'https://github.com/axiomhq/mcp-server-axiom.git',
+    createdAt: '2023-06-15',
+    author: {
+      name: 'Axiom Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: '7',
+    name: 'Bankless Onchain',
+    description: 'Query Onchain data, like ERC20 tokens, transaction history, smart contract state.',
+    type: 'server',
+    category: 'server',
+    sdkType: ['typescript', 'javascript'],
+    stars: 290,
+    rating: 4.6,
+    reviewCount: 48,
+    tags: ['onchain', 'blockchain', 'erc20'],
+    github: 'https://github.com/Bankless/onchain-mcp.git',
+    createdAt: '2023-05-10',
+    author: {
+      name: 'Bankless Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: '8',
+    name: 'Box',
+    description: 'Interact with the Intelligent Content Management platform through Box AI.',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['typescript', 'javascript'],
+    stars: 330,
+    rating: 4.5,
+    reviewCount: 52,
+    tags: ['box', 'content', 'ai'],
+    github: 'https://github.com/box-community/mcp-server-box.git',
+    createdAt: '2023-04-08',
+    author: {
+      name: 'Box Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: '9',
+    name: 'Browserbase',
+    description: 'Automate browser interactions in the cloud (e.g. web navigation, data extraction, form filling, and more).',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['typescript', 'javascript'],
+    stars: 375,
+    rating: 4.7,
+    reviewCount: 58,
+    tags: ['browser', 'automation', 'data'],
+    github: 'https://github.com/browserbase/mcp-server-browserbase.git',
+    createdAt: '2023-03-12',
+    author: {
+      name: 'Browserbase Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: '10',
+    name: 'Chroma',
+    description: 'Embeddings, vector search, document storage, and full-text search with the open-source AI application database.',
+    type: 'server',
+    category: 'database',
+    sdkType: ['python'],
+    stars: 500,
+    rating: 4.9,
+    reviewCount: 76,
+    tags: ['embeddings', 'vector search', 'ai'],
+    github: 'https://github.com/chroma-core/chroma-mcp.git',
+    createdAt: '2023-02-01',
+    author: {
+      name: 'Chroma Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'chronulus-ai',
+    name: 'Chronulus AI',
+    description: 'Predict anything with Chronulus AI forecasting and prediction agents.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript', 'python'],
+    stars: 210,
+    rating: 4.6,
+    reviewCount: 48,
+    tags: ['forecasting', 'prediction', 'ai', 'agents'],
+    github: 'https://github.com/ChronulusAI/chronulus-mcp.git',
+    createdAt: '2024-05-10',
+    author: {
+      name: 'Chronulus Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'clickhouse',
+    name: 'ClickHouse',
+    description: 'Query your ClickHouse database server.',
+    type: 'server',
+    category: 'database',
+    sdkType: ['typescript', 'go'],
+    stars: 980,
+    rating: 4.9,
+    reviewCount: 132,
+    tags: ['database', 'query', 'clickhouse'],
+    github: 'https://github.com/ClickHouse/mcp-clickhouse.git',
+    createdAt: '2021-01-20',
+    author: {
+      name: 'ClickHouse Inc.',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  // {
+  //   id: 'cloudflare',
+  //   name: 'Cloudflare',
+  //   description: 'Deploy, configure & interrogate your resources on the Cloudflare developer platform (e.g. Workers/KV/R2/D1)',
+  //   type: 'server',
+  //   category: 'cloud',
+  //   sdkType: ['typescript', 'javascript'],
+  //   stars: 760,
+  //   rating: 4.7,
+  //   reviewCount: 89,
+  //   tags: ['cloud', 'deployment', 'cloudflare', 'workers'],
+  //   github: 'https://github.com/cloudflare/workers-sdk',
+  //   createdAt: '2022-03-12',
+  //   author: {
+  //     name: 'Cloudflare',
+  //     avatar: '/placeholder.svg'
+  //   },
+  //   featured: true
+  // },
+  {
+    id: 'comet-opik',
+    name: 'Comet Opik',
+    description: 'Query and analyze your Opik logs, traces, prompts and all other telemetry data from your LLMs in natural language.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['python'],
+    stars: 312,
+    rating: 4.5,
+    reviewCount: 36,
+    tags: ['llm', 'logs', 'telemetry', 'tracing'],
+    github: 'https://github.com/cometml/opik',
+    createdAt: '2023-07-19',
+    author: {
+      name: 'Comet ML',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  // {
+  //   id: 'convex',
+  //   name: 'Convex',
+  //   description: 'Introspect and query your apps deployed to Convex.',
+  //   type: 'server',
+  //   category: 'database',
+  //   sdkType: ['typescript'],
+  //   stars: 450,
+  //   rating: 4.7,
+  //   reviewCount: 51,
+  //   tags: ['database', 'query', 'convex', 'apps'],
+  //   github: 'https://github.com/get-convex/convex',
+  //   createdAt: '2022-11-05',
+  //   author: {
+  //     name: 'Convex',
+  //     avatar: '/placeholder.svg'
+  //   },
+  //   featured: false
+  // },
+  {
+    id: 'dart',
+    name: 'Dart',
+    description: 'Interact with task, doc, and project data in Dart, an AI-native project management tool.',
+    type: 'server',
+    category: 'client',
+    sdkType: ['javascript'],
+    stars: 275,
+    rating: 4.4,
+    reviewCount: 30,
+    tags: ['project-management', 'ai', 'tasks'],
+    github: 'https://github.com/its-dart/dart-mcp-server.git',
+    createdAt: '2023-02-20',
+    author: {
+      name: 'Dart Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'devhub',
+    name: 'DevHub',
+    description: 'Manage and utilize website content within the DevHub CMS platform.',
+    type: 'server',
+    category: 'sdk',
+    sdkType: ['typescript'],
+    stars: 190,
+    rating: 4.3,
+    reviewCount: 24,
+    tags: ['cms', 'content-management', 'web'],
+    github: 'https://github.com/devhub/devhub-cms-mcp.git',
+    createdAt: '2022-06-15',
+    author: {
+      name: 'DevHub',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
   }
 ];
 
