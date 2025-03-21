@@ -773,25 +773,25 @@ export const servers: ServerClient[] = [
     },
     featured: true
   },
-  // {
-  //   id: 'cloudflare',
-  //   name: 'Cloudflare',
-  //   description: 'Deploy, configure & interrogate your resources on the Cloudflare developer platform (e.g. Workers/KV/R2/D1)',
-  //   type: 'server',
-  //   category: 'cloud',
-  //   sdkType: ['typescript', 'javascript'],
-  //   stars: 760,
-  //   rating: 4.7,
-  //   reviewCount: 89,
-  //   tags: ['cloud', 'deployment', 'cloudflare', 'workers'],
-  //   github: 'https://github.com/cloudflare/workers-sdk',
-  //   createdAt: '2022-03-12',
-  //   author: {
-  //     name: 'Cloudflare',
-  //     avatar: '/placeholder.svg'
-  //   },
-  //   featured: true
-  // },
+  {
+    id: 'cloudflare',
+    name: 'Cloudflare',
+    description: 'Deploy, configure & interrogate your resources on the Cloudflare developer platform (e.g. Workers/KV/R2/D1)',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['typescript', 'javascript'],
+    stars: 760,
+    rating: 4.7,
+    reviewCount: 89,
+    tags: ['cloud', 'deployment', 'cloudflare', 'workers'],
+    github: 'https://github.com/cloudflare/mcp-server-cloudflare.git',
+    createdAt: '2022-03-12',
+    author: {
+      name: 'Cloudflare',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
   {
     id: 'comet-opik',
     name: 'Comet Opik',
@@ -803,7 +803,7 @@ export const servers: ServerClient[] = [
     rating: 4.5,
     reviewCount: 36,
     tags: ['llm', 'logs', 'telemetry', 'tracing'],
-    github: 'https://github.com/cometml/opik',
+    github: 'https://github.com/comet-ml/opik-mcp.git',
     createdAt: '2023-07-19',
     author: {
       name: 'Comet ML',
@@ -867,6 +867,937 @@ export const servers: ServerClient[] = [
       avatar: '/placeholder.svg'
     },
     featured: false
+  },
+  {
+    id: 'e2b',
+    name: 'E2B',
+    description: 'Run code in secure sandboxes hosted by E2B',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['typescript', 'javascript'],
+    stars: 500,
+    rating: 4.9,
+    reviewCount: 120,
+    tags: ['sandbox', 'secure', 'code execution'],
+    github: 'https://github.com/e2b-dev/mcp-server.git',
+    createdAt: '2024-01-15',
+    author: {
+      name: 'E2B Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'edubase',
+    name: 'EduBase',
+    description: 'Interact with EduBase, a comprehensive e-learning platform with advanced quizzing, exam management, and content organization capabilities',
+    type: 'server',
+    category: 'client',
+    sdkType: ['typescript'],
+    stars: 350,
+    rating: 4.7,
+    reviewCount: 80,
+    tags: ['education', 'elearning', 'quiz'],
+    github: 'https://github.com/EduBase/MCP.git',
+    createdAt: '2023-11-10',
+    author: {
+      name: 'EduBase Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'esignatures',
+    name: 'eSignatures',
+    description: 'Contract and template management for drafting, reviewing, and sending binding contracts.',
+    type: 'server',
+    category: 'security',
+    sdkType: ['typescript'],
+    stars: 420,
+    rating: 4.8,
+    reviewCount: 95,
+    tags: ['contracts', 'signatures', 'legal'],
+    github: 'https://github.com/esignaturescom/mcp-server-esignatures.git',
+    createdAt: '2023-12-01',
+    author: {
+      name: 'eSignatures Inc.',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'fewsats',
+    name: 'Fewsats',
+    description: 'Enable AI Agents to purchase anything in a secure way using Fewsats',
+    type: 'server',
+    category: 'security',
+    sdkType: ['typescript', 'javascript'],
+    stars: 390,
+    rating: 4.6,
+    reviewCount: 75,
+    tags: ['payment', 'secure', 'ai'],
+    github: 'https://github.com/Fewsats/fewsats-mcp.git',
+    createdAt: '2023-12-05',
+    author: {
+      name: 'Fewsats',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'fibery',
+    name: 'Fibery',
+    description: 'Perform queries and entity operations in your Fibery workspace.',
+    type: 'server',
+    category: 'database',
+    sdkType: ['typescript'],
+    stars: 410,
+    rating: 4.7,
+    reviewCount: 85,
+    tags: ['workspace', 'query', 'operations'],
+    github: 'https://github.com/Fibery-inc/fibery-mcp-server.git',
+    createdAt: '2023-11-12',
+    author: {
+      name: 'Fibery Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'financial-datasets',
+    name: 'Financial Datasets',
+    description: 'Stock market API made for AI agents',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['javascript'],
+    stars: 530,
+    rating: 4.8,
+    reviewCount: 110,
+    tags: ['stock', 'market', 'api'],
+    github: 'https://github.com/financial-datasets/mcp-server.git',
+    createdAt: '2024-01-01',
+    author: {
+      name: 'Financial API Inc.',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'firecrawl',
+    name: 'Firecrawl',
+    description: 'Extract web data with Firecrawl',
+    type: 'server',
+    category: 'performance',
+    sdkType: ['typescript'],
+    stars: 480,
+    rating: 4.7,
+    reviewCount: 90,
+    tags: ['web', 'crawl', 'extract'],
+    github: 'https://github.com/mendableai/firecrawl-mcp-server.git',
+    createdAt: '2023-12-20',
+    author: {
+      name: 'Firecrawl',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'fireproof',
+    name: 'Fireproof',
+    description: 'Immutable ledger database with live synchronization',
+    type: 'server',
+    category: 'database',
+    sdkType: ['typescript', 'javascript'],
+    stars: 460,
+    rating: 4.8,
+    reviewCount: 100,
+    tags: ['ledger', 'immutable', 'database'],
+    github: 'https://github.com/fireproof-storage/mcp-database-server.git',
+    createdAt: '2023-12-25',
+    author: {
+      name: 'Fireproof Inc.',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'gitee',
+    name: 'Gitee',
+    description: 'Gitee API integration, repository, issue, and pull request management, and more.',
+    type: 'server',
+    category: 'client',
+    sdkType: ['javascript'],
+    stars: 520,
+    rating: 4.7,
+    reviewCount: 105,
+    tags: ['repo', 'issues', 'git'],
+    github: 'https://github.com/oschina/mcp-gitee.git',
+    createdAt: '2024-01-10',
+    author: {
+      name: 'Gitee Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'grafana',
+    name: 'Grafana',
+    description: 'Search dashboards, investigate incidents and query datasources in your Grafana instance',
+    type: 'server',
+    category: 'performance',
+    sdkType: ['typescript'],
+    stars: 850,
+    rating: 4.9,
+    reviewCount: 200,
+    tags: ['dashboards', 'metrics', 'monitoring'],
+    github: 'https://github.com/grafana/mcp-grafana.git',
+    createdAt: '2023-09-10',
+    author: {
+      name: 'Grafana Labs',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'graphlit',
+    name: 'Graphlit',
+    description: 'Ingest anything from Slack to Gmail to podcast feeds, in addition to web crawling, into a searchable Graphlit project.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['javascript'],
+    stars: 640,
+    rating: 4.8,
+    reviewCount: 140,
+    tags: ['data ingestion', 'search', 'web crawling'],
+    github: 'https://github.com/graphlit/graphlit-mcp-server.git',
+    createdAt: '2024-01-20',
+    author: {
+      name: 'Graphlit',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'hologres',
+    name: 'Hologres',
+    description: 'Connect to a Hologres instance, get table metadata, query and analyze data.',
+    type: 'server',
+    category: 'database',
+    sdkType: ['typescript'],
+    stars: 720,
+    rating: 4.7,
+    reviewCount: 160,
+    tags: ['database', 'query', 'analytics'],
+    github: 'https://github.com/aliyun/alibabacloud-hologres-mcp-server.git',
+    createdAt: '2023-10-05',
+    author: {
+      name: 'Hologres Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'hyperbrowser',
+    name: 'Hyperbrowser',
+    description: 'Next-gen platform empowering AI agents and enabling scalable browser automation.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript', 'javascript'],
+    stars: 780,
+    rating: 4.9,
+    reviewCount: 175,
+    tags: ['automation', 'ai', 'browser'],
+    github: 'https://github.com/hyperbrowserai/mcp.git',
+    createdAt: '2024-02-01',
+    author: {
+      name: 'Hyperbrowser',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'ibm-wxflows',
+    name: 'IBM wxflows',
+    description: 'Tool platform by IBM to build, test and deploy tools for any data source',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['typescript'],
+    stars: 910,
+    rating: 4.8,
+    reviewCount: 210,
+    tags: ['deployment', 'tools', 'data'],
+    github: 'https://github.com/IBM/wxflows.git',
+    createdAt: '2023-08-15',
+    author: {
+      name: 'IBM',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'forevervm',
+    name: 'ForeverVM',
+    description: 'Run Python in a code sandbox.',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['typescript'],
+    stars: 670,
+    rating: 4.7,
+    reviewCount: 130,
+    tags: ['sandbox', 'python', 'execution'],
+    github: 'https://github.com/jamsocket/forevervm.git',
+    createdAt: '2023-12-18',
+    author: {
+      name: 'ForeverVM',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'inbox-zero',
+    name: 'Inbox Zero',
+    description: 'AI personal assistant for email Inbox Zero',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript'],
+    stars: 560,
+    rating: 4.6,
+    reviewCount: 115,
+    tags: ['email', 'ai', 'assistant'],
+    github: 'https://github.com/elie222/inbox-zero.git',
+    createdAt: '2023-11-05',
+    author: {
+      name: 'Inbox Zero Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'inkeep',
+    name: 'Inkeep',
+    description: 'RAG Search over your content powered by Inkeep',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript'],
+    stars: 600,
+    rating: 4.8,
+    reviewCount: 125,
+    tags: ['search', 'rag', 'content'],
+    github: 'https://github.com/inkeep/mcp-server-python.git',
+    createdAt: '2024-01-05',
+    author: {
+      name: 'Inkeep',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'integration-app',
+    name: 'Integration App',
+    description: 'Interact with any other SaaS applications on behalf of your customers.',
+    type: 'server',
+    category: 'sdk',
+    sdkType: ['javascript'],
+    stars: 730,
+    rating: 4.7,
+    reviewCount: 150,
+    tags: ['saas', 'integration', 'sdk'],
+    github: 'https://github.com/integration-app/mcp-server.git',
+    createdAt: '2023-12-10',
+    author: {
+      name: 'Integration Inc.',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'jetbrains',
+    name: 'JetBrains',
+    description: 'Work on your code with JetBrains IDEs',
+    type: 'server',
+    category: 'sdk',
+    sdkType: ['typescript'],
+    stars: 950,
+    rating: 5.0,
+    reviewCount: 250,
+    tags: ['ide', 'development', 'tools'],
+    github: 'https://github.com/JetBrains/mcp-jetbrains.git',
+    createdAt: '2023-07-25',
+    author: {
+      name: 'JetBrains',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'kagi-search',
+    name: 'Kagi Search',
+    description: 'Search the web using Kagi\'s search API',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript'],
+    stars: 680,
+    rating: 4.8,
+    reviewCount: 140,
+    tags: ['search', 'web', 'api'],
+    github: 'https://github.com/kagisearch/kagimcp.git',
+    createdAt: '2024-01-12',
+    author: {
+      name: 'Kagi',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'logfire',
+    name: 'Logfire',
+    description: 'Access OpenTelemetry traces and metrics through Logfire.',
+    type: 'server',
+    category: 'performance',
+    sdkType: ['typescript'],
+    stars: 770,
+    rating: 4.9,
+    reviewCount: 165,
+    tags: ['tracing', 'metrics', 'monitoring'],
+    github: 'https://github.com/pydantic/logfire-mcp.git',
+    createdAt: '2023-12-28',
+    author: {
+      name: 'Logfire',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'langfuse',
+    name: 'Langfuse Prompt Management',
+    description: 'Open-source tool for collaborative editing, versioning, evaluating, and releasing prompts.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['javascript'],
+    stars: 800,
+    rating: 4.8,
+    reviewCount: 175,
+    tags: ['prompts', 'ai', 'versioning'],
+    github: 'https://github.com/langfuse/mcp-server-langfuse.git',
+    createdAt: '2023-11-30',
+    author: {
+      name: 'Langfuse',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'lingo-dev',
+    name: 'Lingo.dev',
+    description: 'Make your AI agent speak every language on the planet, using Lingo.dev Localization Engine.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript'],
+    stars: 690,
+    rating: 4.7,
+    reviewCount: 130,
+    tags: ['localization', 'ai', 'languages'],
+    github: 'https://github.com/lingodotdev/lingo.dev.git',
+    createdAt: '2024-01-08',
+    author: {
+      name: 'Lingo.dev',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'make',
+    name: 'Make',
+    description: 'Turn your Make scenarios into callable tools for AI assistants.',
+    type: 'server',
+    category: 'sdk',
+    sdkType: ['javascript'],
+    stars: 750,
+    rating: 4.8,
+    reviewCount: 155,
+    tags: ['ai', 'scenarios', 'automation'],
+    github: 'https://github.com/integromat/make-mcp-server.git',
+    createdAt: '2023-12-22',
+    author: {
+      name: 'Make',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'meilisearch',
+    name: 'Meilisearch',
+    description: 'Interact & query with Meilisearch (Full-text & semantic search API)',
+    type: 'server',
+    category: 'database',
+    sdkType: ['typescript'],
+    stars: 820,
+    rating: 4.9,
+    reviewCount: 180,
+    tags: ['search', 'database', 'api'],
+    github: 'https://github.com/meilisearch/meilisearch-mcp.git',
+    createdAt: '2024-01-01',
+    author: {
+      name: 'Meilisearch',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'metoro',
+    name: 'Metoro',
+    description: 'Query and interact with kubernetes environments monitored by Metoro',
+    type: 'server',
+    category: 'server',
+    sdkType: ['typescript'],
+    stars: 320,
+    rating: 4.5,
+    reviewCount: 30,
+    tags: ['kubernetes', 'monitoring'],
+    github: 'https://github.com/metoro-io/metoro-mcp-server.git',
+    createdAt: '2023-06-12',
+    author: {
+      name: 'Metoro Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'milvus',
+    name: 'Milvus',
+    description: 'Search, Query and interact with data in your Milvus Vector Database.',
+    type: 'server',
+    category: 'database',
+    sdkType: ['go', 'python'],
+    stars: 290,
+    rating: 4.7,
+    reviewCount: 28,
+    tags: ['vector', 'database', 'search'],
+    github: 'https://github.com/zilliztech/mcp-server-milvus.git',
+    createdAt: '2023-05-20',
+    author: {
+      name: 'Milvus Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'motherduck',
+    name: 'MotherDuck',
+    description: 'Query and analyze data with MotherDuck and local DuckDB',
+    type: 'server',
+    category: 'database',
+    sdkType: ['typescript'],
+    stars: 350,
+    rating: 4.8,
+    reviewCount: 40,
+    tags: ['duckdb', 'analytics', 'query'],
+    github: 'https://github.com/motherduckdb/mcp-server-motherduck.git',
+    createdAt: '2023-08-10',
+    author: {
+      name: 'MotherDuck Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'needle',
+    name: 'Needle',
+    description: 'Production-ready RAG out of the box to search and retrieve data from your own documents.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['python'],
+    stars: 410,
+    rating: 4.9,
+    reviewCount: 55,
+    tags: ['rag', 'search', 'documents'],
+    github: 'https://github.com/needle-ai/needle-mcp.git',
+    createdAt: '2023-09-01',
+    author: {
+      name: 'Needle AI',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'neo4j',
+    name: 'Neo4j',
+    description: 'Neo4j graph database server (schema + read/write-cypher) and separate graph database backed memory',
+    type: 'server',
+    category: 'database',
+    sdkType: ['java', 'python'],
+    stars: 500,
+    rating: 4.7,
+    reviewCount: 60,
+    tags: ['graph', 'database', 'cypher'],
+    github: 'https://github.com/neo4j-contrib/mcp-neo4j.git',
+    createdAt: '2023-07-18',
+    author: {
+      name: 'Neo4j Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'neon',
+    name: 'Neon',
+    description: 'Interact with the Neon serverless Postgres platform',
+    type: 'server',
+    category: 'database',
+    sdkType: ['typescript', 'go'],
+    stars: 330,
+    rating: 4.6,
+    reviewCount: 36,
+    tags: ['postgres', 'serverless', 'database'],
+    github: 'https://github.com/neondatabase-labs/mcp-server-neon.git',
+    createdAt: '2023-06-01',
+    author: {
+      name: 'Neon',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'octagon',
+    name: 'Octagon',
+    description: 'Deliver real-time investment research with extensive private and public market data.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['python'],
+    stars: 285,
+    rating: 4.4,
+    reviewCount: 22,
+    tags: ['finance', 'research', 'market-data'],
+    github: 'https://github.com/OctagonAI/octagon-mcp-server.git',
+    createdAt: '2023-05-11',
+    author: {
+      name: 'Octagon AI',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'oxylabs',
+    name: 'Oxylabs',
+    description: 'Scrape websites with Oxylabs Web API, supporting dynamic rendering and parsing for structured data extraction.',
+    type: 'server',
+    category: 'client',
+    sdkType: ['python'],
+    stars: 410,
+    rating: 4.8,
+    reviewCount: 50,
+    tags: ['scraping', 'api', 'web'],
+    github: 'https://github.com/oxylabs/oxylabs-mcp.git',
+    createdAt: '2023-08-30',
+    author: {
+      name: 'Oxylabs',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'qdrant',
+    name: 'Qdrant',
+    description: 'Implement semantic memory layer on top of the Qdrant vector search engine',
+    type: 'server',
+    category: 'database',
+    sdkType: ['rust', 'python'],
+    stars: 470,
+    rating: 4.9,
+    reviewCount: 62,
+    tags: ['vector', 'semantic', 'search'],
+    github: 'https://github.com/qdrant/mcp-server-qdrant.git',
+    createdAt: '2023-07-05',
+    author: {
+      name: 'Qdrant Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'ramp',
+    name: 'Ramp',
+    description: 'Interact with Ramp\'s Developer API to run analysis on your spend and gain insights leveraging LLMs',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript', 'javascript'],
+    stars: 210,
+    rating: 4.6,
+    reviewCount: 33,
+    tags: ['finance', 'analytics', 'llm', 'spend'],
+    github: 'https://github.com/ramp-public/ramp-mcp.git',
+    createdAt: '2023-10-01',
+    author: {
+      name: 'Ramp Devs',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'raygun',
+    name: 'Raygun',
+    description: 'Interact with your crash reporting and real using monitoring data on your Raygun account',
+    type: 'server',
+    category: 'performance',
+    sdkType: ['python', 'typescript'],
+    stars: 320,
+    rating: 4.7,
+    reviewCount: 45,
+    tags: ['monitoring', 'crash-reporting', 'performance'],
+    github: 'https://github.com/MindscapeHQ/mcp-server-raygun.git',
+    createdAt: '2023-09-20',
+    author: {
+      name: 'Raygun',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'rember',
+    name: 'Rember',
+    description: 'Create spaced repetition flashcards in Rember to remember anything you learn in your chats',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript'],
+    stars: 150,
+    rating: 4.5,
+    reviewCount: 28,
+    tags: ['flashcards', 'learning', 'memory'],
+    github: 'https://github.com/rember/rember-mcp.git',
+    createdAt: '2023-08-10',
+    author: {
+      name: 'Rember Devs',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'riza',
+    name: 'Riza logo Riza',
+    description: 'Arbitrary code execution and tool-use platform for LLMs by Riza',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['python'],
+    stars: 295,
+    rating: 4.9,
+    reviewCount: 39,
+    tags: ['llm', 'code-execution', 'tools'],
+    github: '',
+    createdAt: '2023-07-25',
+    author: {
+      name: 'Riza',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'search1api',
+    name: 'Search1API',
+    description: 'One API for Search, Crawling, and Sitemaps',
+    type: 'server',
+    category: 'client',
+    sdkType: ['javascript'],
+    stars: 180,
+    rating: 4.4,
+    reviewCount: 22,
+    tags: ['search', 'crawl', 'sitemap'],
+    github: 'https://github.com/fatwang2/search1api-mcp.git',
+    createdAt: '2023-06-30',
+    author: {
+      name: 'Search1API',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'screenshotone',
+    name: 'ScreenshotOne',
+    description: 'Render website screenshots with ScreenshotOne',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['javascript', 'python'],
+    stars: 260,
+    rating: 4.7,
+    reviewCount: 36,
+    tags: ['screenshot', 'render', 'automation'],
+    github: 'https://github.com/screenshotone/mcp.git',
+    createdAt: '2023-08-15',
+    author: {
+      name: 'ScreenshotOne',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'starrocks',
+    name: 'StarRocks',
+    description: 'Interact with StarRocks',
+    type: 'server',
+    category: 'database',
+    sdkType: ['go', 'python'],
+    stars: 410,
+    rating: 4.8,
+    reviewCount: 55,
+    tags: ['database', 'analytics', 'starrocks'],
+    github: 'https://github.com/StarRocks/mcp-server-starrocks.git',
+    createdAt: '2023-07-01',
+    author: {
+      name: 'StarRocks Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'stripe',
+    name: 'Stripe',
+    description: 'Interact with Stripe API',
+    type: 'server',
+    category: 'client',
+    sdkType: ['typescript', 'python'],
+    stars: 500,
+    rating: 4.9,
+    reviewCount: 80,
+    tags: ['payments', 'api', 'finance'],
+    github: 'https://github.com/stripe/agent-toolkit.git',
+    createdAt: '2023-06-20',
+    author: {
+      name: 'Stripe',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'tavily',
+    name: 'Tavily',
+    description: 'Search engine for AI agents (search + extract) powered by Tavily',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['javascript'],
+    stars: 170,
+    rating: 4.5,
+    reviewCount: 30,
+    tags: ['search', 'ai', 'agents'],
+    github: 'https://github.com/tavily-ai/tavily-mcp.git',
+    createdAt: '2023-07-28',
+    author: {
+      name: 'Tavily',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'tinybird',
+    name: 'Tinybird',
+    description: 'Interact with Tinybird serverless ClickHouse platform',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['python', 'typescript'],
+    stars: 285,
+    rating: 4.6,
+    reviewCount: 31,
+    tags: ['analytics', 'cloud', 'clickhouse'],
+    github: 'https://github.com/tinybirdco/mcp-tinybird.git',
+    createdAt: '2023-08-22',
+    author: {
+      name: 'Tinybird',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'unifai',
+    name: 'UnifAI',
+    description: 'Dynamically search and call tools using UnifAI Network',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript'],
+    stars: 240,
+    rating: 4.5,
+    reviewCount: 29,
+    tags: ['network', 'ai', 'tools'],
+    github: 'https://github.com/unifai-network/unifai-mcp-server.git',
+    createdAt: '2023-07-10',
+    author: {
+      name: 'UnifAI',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'vectorize',
+    name: 'Vectorize',
+    description: 'Vectorize MCP server for advanced retrieval, Private Deep Research, Anything-to-Markdown file extraction and text chunking.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['python'],
+    stars: 310,
+    rating: 4.8,
+    reviewCount: 41,
+    tags: ['vector', 'retrieval', 'markdown'],
+    github: 'https://github.com/vectorize-io/vectorize-mcp-server.git',
+    createdAt: '2023-08-18',
+    author: {
+      name: 'Vectorize',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'verodat',
+    name: 'Verodat',
+    description: 'Interact with Verodat AI Ready Data platform',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['typescript'],
+    stars: 200,
+    rating: 4.3,
+    reviewCount: 25,
+    tags: ['data', 'platform', 'ai'],
+    github: 'https://github.com/Verodat/verodat-mcp-server.git',
+    createdAt: '2023-09-05',
+    author: {
+      name: 'Verodat',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'veyrax',
+    name: 'VeyraX',
+    description: 'Single tool to control all 100+ API integrations, and UI components',
+    type: 'server',
+    category: 'client',
+    sdkType: ['typescript'],
+    stars: 230,
+    rating: 4.5,
+    reviewCount: 27,
+    tags: ['api', 'integration', 'ui'],
+    github: 'https://github.com/VeyraX/veyrax-mcp.git',
+    createdAt: '2023-08-05',
+    author: {
+      name: 'VeyraX',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'zenml',
+    name: 'ZenML',
+    description: 'Interact with your MLOps and LLMOps pipelines through your ZenML MCP server',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['python'],
+    stars: 375,
+    rating: 4.7,
+    reviewCount: 37,
+    tags: ['mlops', 'llmops', 'pipeline'],
+    github: 'https://github.com/zenml-io/mcp-zenml.git',
+    createdAt: '2023-09-15',
+    author: {
+      name: 'ZenML',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
   }
 ];
 
