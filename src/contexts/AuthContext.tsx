@@ -134,7 +134,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // Clear any local state
       setUser(null);
       // Force reload to clear everything
-      window.location.href = '/signin';
+      window.location.href = '/';
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred during sign out');
       throw err;
@@ -149,7 +149,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
         options: {
-          redirectTo:`${window.location.origin}/auth/callback`,
+          redirectTo: `${window.location.origin}/`,
           skipBrowserRedirect: false
         }
       });
