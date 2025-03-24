@@ -1798,7 +1798,654 @@ export const servers: ServerClient[] = [
       avatar: '/placeholder.svg'
     },
     featured: true
-  }
+  },
+  {
+    id: 'ableton-live',
+    name: 'Ableton Live',
+    description: 'An MCP server to control Ableton Live.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['python'],
+    stars: 120,
+    rating: 4.5,
+    reviewCount: 20,
+    tags: ['ableton', 'music', 'automation'],
+    github: 'https://github.com/Simon-Kansara/ableton-live-mcp-server.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'airbnb',
+    name: 'Airbnb',
+    description: 'Provides tools to search Airbnb and get listing details.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['python','typescript'],
+    stars: 98,
+    rating: 4.4,
+    reviewCount: 15,
+    tags: ['airbnb', 'search', 'travel'],
+    github: 'https://github.com/openbnb-org/mcp-server-airbnb.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'algorand',
+    name: 'Algorand',
+    description: 'A comprehensive MCP server for tooling interactions (40+) and resource accessibility (60+) plus many useful prompts for interacting with the Algorand blockchain.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['python','javascript'],
+    stars: 150,
+    rating: 4.7,
+    reviewCount: 30,
+    tags: ['algorand', 'blockchain', 'crypto'],
+    github: 'https://github.com/GoPlausible/algorand-mcp.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'airflow',
+    name: 'Airflow',
+    description: 'A MCP Server that connects to Apache Airflow using official python client.',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['python'],
+    stars: 110,
+    rating: 4.5,
+    reviewCount: 18,
+    tags: ['airflow', 'workflow', 'orchestration'],
+    github: 'https://github.com/yangkyeongmo/mcp-server-apache-airflow.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'airtable-access',
+    name: 'Airtable Access',
+    description: 'Read and write access to Airtable databases, with schema inspection.',
+    type: 'server',
+    category: 'database',
+    sdkType: ['javascript','typescript'],
+    stars: 130,
+    rating: 4.6,
+    reviewCount: 22,
+    tags: ['airtable', 'database', 'schema'],
+    github: 'https://github.com/domdomegg/airtable-mcp-server.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'airtable-mcp',
+    name: 'Airtable MCP',
+    description: 'Airtable Model Context Protocol Server.',
+    type: 'server',
+    category: 'database',
+    sdkType: ['typescript','javascript'],
+    stars: 125,
+    rating: 4.5,
+    reviewCount: 19,
+    tags: ['airtable', 'mcp', 'data'],
+    github: 'https://github.com/felores/airtable-mcp.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'alphavantage',
+    name: 'AlphaVantage',
+    description: 'MCP server for stock market data API AlphaVantage.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['python'],
+    stars: 140,
+    rating: 4.7,
+    reviewCount: 24,
+    tags: ['stock', 'finance', 'api'],
+    github: 'https://github.com/calvernaz/alphavantage.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'anki',
+    name: 'Anki',
+    description: 'An MCP server for interacting with your Anki decks and cards.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['javascript'],
+    stars: 115,
+    rating: 4.6,
+    reviewCount: 21,
+    tags: ['anki', 'flashcards', 'learning'],
+    github: 'https://github.com/scorzeth/anki-mcp-server.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'any-chat-completions',
+    name: 'Any Chat Completions',
+    description: 'Interact with any OpenAI SDK Compatible Chat Completions API like OpenAI, Perplexity, Groq, xAI and many more.',
+    type: 'server',
+    category: 'ai',
+    sdkType: ['typescript'],
+    stars: 160,
+    rating: 4.8,
+    reviewCount: 28,
+    tags: ['chat', 'llm', 'completions'],
+    github: 'https://github.com/pyroprompts/any-chat-completions-mcp.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'arangodb',
+    name: 'ArangoDB',
+    description: 'MCP Server that provides database interaction capabilities through ArangoDB.',
+    type: 'server',
+    category: 'database',
+    sdkType: ['javascript','typescript'],
+    stars: 100,
+    rating: 4.5,
+    reviewCount: 17,
+    tags: ['arangodb', 'database'],
+    github: 'https://github.com/ravenwits/mcp-server-arangodb.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'atlassian',
+    name: 'Atlassian',
+    description: 'Interact with Atlassian Cloud products (Confluence and Jira) including searching/reading Confluence spaces/pages, accessing Jira issues, and project metadata.',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['python'],
+    stars: 135,
+    rating: 4.6,
+    reviewCount: 23,
+    tags: ['jira', 'confluence', 'atlassian'],
+    github: 'https://github.com/sooperset/mcp-atlassian.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'aws',
+    name: 'AWS',
+    description: 'Perform operations on your AWS resources using an LLM.',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['python'],
+    stars: 170,
+    rating: 4.9,
+    reviewCount: 35,
+    tags: ['aws', 'cloud', 'llm'],
+    github: 'https://github.com/rishikavikondala/mcp-server-aws.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'aws-athena',
+    name: 'AWS Athena',
+    description: 'A MCP server for AWS Athena to run SQL queries on Glue Catalog.',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['javacript','typescript'],
+    stars: 130,
+    rating: 4.7,
+    reviewCount: 26,
+    tags: ['athena', 'aws', 'sql'],
+    github: 'https://github.com/lishenxydlgzs/aws-athena-mcp.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'aws-cost-explorer',
+    name: 'AWS Cost Explorer',
+    description: 'Optimize your AWS spend (including Amazon Bedrock spend) with this MCP server by examining spend across regions, services, instance types and foundation models (demo video).',
+    type: 'server',
+    category: 'performance',
+    sdkType: ['python'],
+    stars: 140,
+    rating: 4.8,
+    reviewCount: 27,
+    tags: ['aws', 'cost', 'optimization'],
+    github: 'https://github.com/aarora79/aws-cost-explorer-mcp-server.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: true
+  },
+  {
+    id: 'aws-resources-ops',
+    name: 'AWS Resources Operations',
+    description: 'Run generated python code to securely query or modify any AWS resources supported by boto3.',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['python'],
+    stars: 125,
+    rating: 4.7,
+    reviewCount: 22,
+    tags: ['aws', 'boto3', 'resources'],
+    github: 'https://github.com/baryhuang/mcp-server-aws-resources-python.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'aws-s3',
+    name: 'AWS S3',
+    description: 'A sample MCP server for AWS S3 that flexibly fetches objects from S3 such as PDF documents.',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['python'],
+    stars: 115,
+    rating: 4.6,
+    reviewCount: 19,
+    tags: ['aws', 's3', 'storage'],
+    github: 'https://github.com/aws-samples/sample-mcp-server-s3.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: 'azure-adx',
+    name: 'Azure ADX',
+    description: 'Query and analyze Azure Data Explorer databases.',
+    type: 'server',
+    category: 'cloud',
+    sdkType: ['python'],
+    stars: 110,
+    rating: 4.5,
+    reviewCount: 18,
+    tags: ['azure', 'adx', 'data'],
+    github: 'https://github.com/pab1it0/adx-mcp-server.git',
+    createdAt: '2025-03-21',
+    author: {
+      name: 'MCP Team',
+      avatar: '/placeholder.svg'
+    },
+    featured: false
+  },
+  {
+    id: "base-free-usdc-transfer",
+    name: "Base Free USDC Transfer",
+    description: "Send USDC on Base for free using Claude AI! Built with Coinbase CDP.",
+    type: "server",
+    category: "finance",
+    sdkType: ["javascript"],
+    stars: 5,
+    rating: 4.9,
+    reviewCount: 10,
+    tags: ["usdc", "coinbase", "base", "finance"],
+    github: "https://github.com/magnetai/mcp-free-usdc-transfer.git",
+    createdAt: "2025-01-15",
+    author: {
+      name: "GoPlausible",
+      avatar: "/avatars/goplausible.png"
+    },
+    featured: true
+  },
+  {
+    id: "basic-memory",
+    name: "Basic Memory",
+    description: "Local-first knowledge management system that builds a semantic graph from Markdown files, enabling persistent memory across conversations with LLMs.",
+    type: "server",
+    category: "productivity",
+    sdkType: ["python"],
+    stars: 4,
+    rating: 4.5,
+    reviewCount: 8,
+    tags: ["knowledge management", "semantic graph", "markdown", "llm"],
+    github: "https://github.com/basicmachines-co/basic-memory.git",
+    createdAt: "2025-02-10",
+    author: {
+      name: "GoPlausible",
+      avatar: "/avatars/goplausible.png"
+    },
+    featured: false
+  },
+  {
+    id: "bigquery-lucashild",
+    name: "BigQuery (by LucasHild)",
+    description: "This server enables LLMs to inspect database schemas and execute queries on BigQuery.",
+    type: "server",
+    category: "database",
+    sdkType: ["javascript"],
+    stars: 5,
+    rating: 4.7,
+    reviewCount: 12,
+    tags: ["bigquery", "database", "llm", "queries"],
+    github: "https://github.com/GoPlausible/modelcontextprotocol-servers",
+    createdAt: "2025-03-05",
+    author: {
+      name: "LucasHild",
+      avatar: "/avatars/lucashild.png"
+    },
+    featured: true
+  },
+  {
+    id: "bigquery-ergut",
+    name: "BigQuery (by ergut)",
+    description: "Server implementation for Google BigQuery integration that enables direct BigQuery database access and querying capabilities.",
+    type: "server",
+    category: "database",
+    sdkType: ["python"],
+    stars: 5,
+    rating: 4.8,
+    reviewCount: 15,
+    tags: ["bigquery", "database", "google", "queries"],
+    github: "https://github.com/LucasHild/mcp-server-bigquery.git",
+    createdAt: "2024-12-03",
+    author: {
+      name: "Salih Ergüt",
+      avatar: "/avatars/ergut.png"
+    },
+    featured: true
+  },
+  {
+    id: "bing-web-search-api-hanchunglee",
+    name: "Bing Web Search API (by hanchunglee)",
+    description: "Server implementation for Microsoft Bing Web Search API.",
+    type: "server",
+    category: "search",
+    sdkType: ["python"],
+    stars: 4,
+    rating: 4.3,
+    reviewCount: 9,
+    tags: ["bing", "web search", "microsoft", "api"],
+    github: "https://github.com/leehanchung/bing-search-mcp.git",
+    createdAt: "2025-01-20",
+    author: {
+      name: "hanchunglee",
+      avatar: "/avatars/hanchunglee.png"
+    },
+    featured: false
+  },
+  {
+    id: "bitable-mcp-lloydzhou",
+    name: "Bitable MCP (by lloydzhou)",
+    description: "MCP server provides access to Lark Bitable through the Model Context Protocol. It allows users to interact with Bitable tables using predefined tools.",
+    type: "server",
+    category: "productivity",
+    sdkType: ["python"],
+    stars: 4,
+    rating: 4.4,
+    reviewCount: 7,
+    tags: ["bitable", "lark", "tables", "tools"],
+    github: "https://github.com/lloydzhou/bitable-mcp.git",
+    createdAt: "2025-02-15",
+    author: {
+      name: "lloydzhou",
+      avatar: "/avatars/lloydzhou.png"
+    },
+    featured: false
+  },
+  {
+    id: "blender-ahujasid",
+    name: "Blender (by ahujasid)",
+    description: "Blender integration allowing prompt-enabled 3D scene creation, modeling, and manipulation.",
+    type: "server",
+    category: "graphics",
+    sdkType: ["python"],
+    stars: 5,
+    rating: 4.9,
+    reviewCount: 11,
+    tags: ["blender", "3d modeling", "graphics", "integration"],
+    github: "https://github.com/ahujasid/blender-mcp.git",
+    createdAt: "2025-01-25",
+    author: {
+      name: "ahujasid",
+      avatar: "/avatars/ahujasid.png"
+    },
+    featured: true
+  },
+  {
+    id: "cfbd-api",
+    name: "CFBD API",
+    description: "An MCP server for the College Football Data API.",
+    type: "server",
+    category: "sports",
+    sdkType: ["python"],
+    stars: 4,
+    rating: 4.2,
+    reviewCount: 6,
+    tags: ["college football", "data", "sports", "api"],
+    github: "https://github.com/lenwood/cfbd-mcp-server.git",
+    createdAt: "2025-02-05",
+    author: {
+      name: "GoPlausible",
+      avatar: "/avatars/goplausible.png"
+    },
+    featured: false
+  },
+  {
+    id: 'chatmcp',
+    name: 'ChatMCP',
+    description: 'An Open Source Cross-platform GUI Desktop application compatible with Linux, macOS, and Windows, enabling seamless interaction with MCP servers across dynamically selectable LLMs, by AIQL',
+    type: 'server',
+    category: 'system-and-utilities',
+    sdkType: ['HTML','javascript'],
+    stars: 120,
+    rating: 4.7,
+    reviewCount: 25,
+    tags: ['gui', 'desktop', 'cross-platform', 'llm'],
+    github: 'https://github.com/AI-QL/chat-mcp.git',
+    createdAt: '2024-02-10',
+    author: {
+      name: 'AIQLabs',
+      avatar: '/avatars/aiqlabs.png'
+    },
+    featured: false
+  },
+  {
+    id: 'chatsum',
+    name: 'ChatSum',
+    description: 'Query and Summarize chat messages with LLM. by mcpso',
+    type: 'server',
+    category: 'communication',
+    sdkType: ['typescript','javascript'],
+    stars: 85,
+    rating: 4.5,
+    reviewCount: 18,
+    tags: ['chat', 'summarization', 'llm'],
+    github: 'https://github.com/chatmcp/mcp-server-chatsum.git',
+    createdAt: '2023-11-22',
+    author: {
+      name: 'mcpso',
+      avatar: '/avatars/mcpso.png'
+    },
+    featured: false
+  },
+  {
+    id: 'chroma',
+    name: 'Chroma',
+    description: 'Vector database server for semantic document search and metadata filtering, built on Chroma',
+    type: 'server',
+    category: 'ai-and-memory',
+    sdkType: ['python'],
+    stars: 200,
+    rating: 4.9,
+    reviewCount: 40,
+    tags: ['vector-database', 'semantic-search', 'metadata-filtering'],
+    github: 'https://github.com/privetin/chroma.git',
+    createdAt: '2023-09-15',
+    author: {
+      name: 'Chroma Team',
+      avatar: '/avatars/chroma.png'
+    },
+    featured: true
+  },
+  {
+    id: 'claudepost',
+    name: 'ClaudePost',
+    description: 'ClaudePost enables seamless email management for Gmail, offering secure features like email search, reading, and sending.',
+    type: 'server',
+    category: 'communication',
+    sdkType: ['python'],
+    stars: 95,
+    rating: 4.6,
+    reviewCount: 22,
+    tags: ['email', 'gmail', 'management'],
+    github: 'https://github.com/ZilongXue/claude-post.git',
+    createdAt: '2023-12-05',
+    author: {
+      name: 'Claude AI',
+      avatar: '/avatars/claudeai.png'
+    },
+    featured: false
+  },
+  {
+    id: 'cloudinary',
+    name: 'Cloudinary',
+    description: 'Cloudinary Model Context Protocol Server to upload media to Cloudinary and get back the media link and details.',
+    type: 'server',
+    category: 'media',
+    sdkType: ['javascript'],
+    stars: 110,
+    rating: 4.8,
+    reviewCount: 30,
+    tags: ['media', 'upload', 'cloudinary'],
+    github: 'https://github.com/felores/cloudinary-mcp-server.git',
+    createdAt: '2023-10-20',
+    author: {
+      name: 'Cloudinary',
+      avatar: '/avatars/cloudinary.png'
+    },
+    featured: true
+  },
+  {
+    id: 'code-assistant',
+    name: 'code-assistant',
+    description: 'A coding assistant MCP server that allows exploring a code-base and making changes to code. Should be used with trusted repos only (insufficient protection against prompt injections).',
+    type: 'server',
+    category: 'development-tools',
+    sdkType: ['rust'],
+    stars: 75,
+    rating: 4.3,
+    reviewCount: 15,
+    tags: ['coding', 'assistant', 'code-base'],
+    github: 'https://github.com/stippi/code-assistant.git',
+    createdAt: '2024-01-12',
+    author: {
+      name: 'Dev Assistant',
+      avatar: '/avatars/devassistant.png'
+    },
+    featured: false
+  },
+  {
+    id: 'code-executor',
+    name: 'code-executor',
+    description: 'An MCP server that allows LLMs to execute Python code within a specified Conda environment.',
+    type: 'server',
+    category: 'system-and-utilities',
+    sdkType: ['javascript'],
+    stars: 130,
+    rating: 4.7,
+    reviewCount: 28,
+    tags: ['code-execution', 'python', 'conda'],
+    github: 'https://github.com/bazinga012/mcp_code_executor.git',
+    createdAt: '2023-08-30',
+    author: {
+      name: 'LLM Tools',
+      avatar: '/avatars/llmtools.png'
+    },
+    featured: true
+  },
+  {
+    id: 'code-sandbox-mcp',
+    name: 'code-sandbox-mcp',
+    description: 'An MCP server to create secure code sandbox environments for executing code within Docker containers.',
+    type: 'server',
+    category: 'system-and-utilities',
+    sdkType: ['go','shell'],
+    stars: 90,
+    rating: 4.5,
+    reviewCount: 20,
+    tags: ['code-sandbox', 'docker', 'secure-execution'],
+    github: 'https://github.com/Automata-Labs-team/code-sandbox-mcp.git',
+    createdAt: '2023-11-10',
+    author: {
+      name: 'Sandboxing',
+      avatar: '/avatars/sandboxing.png'
+    },
+    featured: false
+  },
+  {
+    id: 'cognee-mcp',
+    name: 'cognee-mcp',
+    description: 'GraphRAG memory server with customizable ingestion, data processing, and search.',
+    type: 'server',
+    category: 'ai-and-memory',
+    sdkType: ['python'],
+    stars: 115,
+    rating: 4.6,
+    reviewCount: 26,
+    tags: ['memory', 'graphrag', 'data-processing'],
+    github: 'https://github.com/topoteretes/cognee.git',
+    createdAt: '2023-09-25',
+    author: {
+      name: 'Cognee',
+      avatar: '/avatars/cognee.png'
+    },
+    featured: true
+  },
+  
 ];
 
 // Helper functions
