@@ -134,7 +134,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // Clear any local state
       setUser(null);
       // Force reload to clear everything
-      window.location.href = '/signin';
+      window.location.href = window.location.origin + '/signin';
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred during sign out');
       throw err;
