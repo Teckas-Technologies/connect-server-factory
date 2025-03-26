@@ -1,14 +1,16 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Link } from 'react-router-dom';
-import { type Category } from '@/lib/mockData';
+import { type Category,type ServerClient } from '@/lib/mockData';
 import { cn } from '@/lib/utils';
-
+import { servers } from "@/lib/mockData";
 interface CategoryCardProps {
   category: Category;
   className?: string;
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({ category, className }) => {
+  const categorizedServers = servers.filter((server) => server.category === category.id);
+
   return (
     <Link 
       to={`/browse?category=${category.id}`}
@@ -31,11 +33,13 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, className }) => {
         </p>
         
         <div className="text-sm font-medium">
-          {category.count} {category.count === 1 ? 'item' : 'items'}
+          {categorizedServers.length} {categorizedServers.length === 1 ? 'item' : 'items'}
         </div>
       </div>
     </Link>
   );
 };
+
+
 
 export default CategoryCard;

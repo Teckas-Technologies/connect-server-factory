@@ -1,10 +1,22 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
+import { ArrowLeft } from "lucide-react";
 const Docs = () => {
+  const navigate = useNavigate();
   return (
-    <div className="min-h-screen py-20 px-4 md:px-8">
+    <div className="min-h-screen py-20 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-white">
       <div className="max-w-4xl mx-auto">
+      <Button
+          variant="ghost"
+          size="sm"
+          className="mb-6"
+          onClick={() => navigate(-1)}
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back
+        </Button>
         <h1 className="text-3xl font-bold mb-4">Documentation</h1>
         <p className="text-muted-foreground mb-8">
           Learn how to use MCP and integrate it into your projects
