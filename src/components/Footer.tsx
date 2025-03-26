@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-50 border-t border-border/40">
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="flex flex-col justify-between md:flex-row gap-6 ">
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 font-medium mb-4">
               <div className="size-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-sm">
@@ -35,18 +35,18 @@ const Footer: React.FC = () => {
             </div>
           </div>
           
-          <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="flex flex-col justify-between md:flex-row">
             <div>
               <h3 className="font-semibold mb-4">Platform</h3>
               <ul className="space-y-3">
                 <li><Link to="/browse" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Browse All</Link></li>
-                <li><Link to="/featured" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Featured</Link></li>
+                {/* <li><Link to="/featured" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Featured</Link></li> */}
                 <li><Link to="/submit" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Submit Server/Client</Link></li>
                 <li><Link to="/docs" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Documentation</Link></li>
               </ul>
             </div>
             
-            <div>
+            {/* <div>
               <h3 className="font-semibold mb-4">Resources</h3>
               <ul className="space-y-3">
                 <li><Link to="/docs/guides" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Guides</Link></li>
@@ -64,26 +64,17 @@ const Footer: React.FC = () => {
                 <li><Link to="/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link></li>
                 <li><Link to="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Terms of Service</Link></li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
         
         <div className="mt-12 pt-8 border-t border-border/60">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="flex flex-col items-center justify-center gap-6">
             <div className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} MCP Marketplace. All rights reserved.
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-              <div className="text-sm text-muted-foreground">Stay updated with our newsletter:</div>
-              <div className="flex w-full sm:w-auto gap-2">
-                <Input placeholder="Enter your email" className="h-9 w-full sm:w-auto max-w-xs" />
-                <Button size="sm" className="h-9">
-                  Subscribe
-                  <ArrowRight className="ml-2 h-3 w-3" />
-                </Button>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>

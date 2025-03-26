@@ -13,13 +13,14 @@ import Settings from '@/pages/Settings';
 import NotFound from '@/pages/NotFound';
 import AuthCallback from '@/pages/AuthCallback';
 import EnvTest from '@/components/EnvTest';
-
+import { SearchFocusProvider } from './contexts/SearchFocusContext';
 const App = () => {
   return (
     <>
       <EnvTest />
       <Router>
         <AuthProvider>
+        <SearchFocusProvider>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/signin" element={<SignIn />} />
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="/auth/callback" element={<AuthCallback />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </SearchFocusProvider>
         </AuthProvider>
       </Router>
     </>

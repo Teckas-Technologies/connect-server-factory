@@ -3,7 +3,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useNavigate } from 'react-router-dom';
-
+import { ArrowLeft } from "lucide-react";
 const Settings = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -31,6 +31,15 @@ const Settings = () => {
   return (
     <div className="min-h-screen py-20 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-white">
       <div className="max-w-3xl mx-auto">
+      <Button
+          variant="ghost"
+          size="sm"
+          className="mb-6"
+          onClick={() => navigate(-1)}
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back
+        </Button>
         <h1 className="text-3xl font-bold mb-4">Settings</h1>
         <p className="text-muted-foreground mb-8">
           Manage your account preferences and security settings

@@ -14,13 +14,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import UserProfile from './UserProfile';
+import { useSearchFocus } from '@/contexts/SearchFocusContext';
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { user, signOut } = useAuth();
-  
+  const inputRef = useSearchFocus(); // get ref from context
+
+  const handleSearchClick = () => {
+    inputRef?.current?.focus(); // focus input
+  };
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -72,7 +77,7 @@ const Navbar: React.FC = () => {
           </div>
           
           <div className="flex items-center gap-4">
-            <Button variant="outline" size="icon" className="rounded-full">
+            <Button variant="outline" size="icon" className="rounded-full" onClick={handleSearchClick}>
               <Search className="size-4" />
             </Button>
             {user ? (
@@ -101,10 +106,11 @@ const Navbar: React.FC = () => {
       
       {/* Mobile Navigation */}
       <div className={cn(
-        "fixed inset-0 top-[57px] bg-white z-40 md:hidden transition-transform-smooth duration-300 ease-in-out",
-        mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        "fixed top-[72px] left-0 right-0 bg-white z-40 md:hidden shadow-lg",
+        "transition-all duration-300 ease-in-out overflow-hidden",
+        mobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
       )}>
-        <nav className="flex flex-col p-6 gap-4">
+        <nav className="flex flex-col p-4 gap-1">
           <Link to="/" className={cn(
             "py-3 px-4 rounded-md font-medium transition-colors-smooth",
             isActive('/') ? "bg-primary/10 text-primary" : "hover:bg-muted"
@@ -140,7 +146,7 @@ const Navbar: React.FC = () => {
               </Link>
               <button
                 onClick={() => signOut()}
-                className="py-3 px-4 rounded-md font-medium transition-colors-smooth hover:bg-muted text-red-600"
+                className="py-3 px-4 rounded-md font-medium transition-colors-smooth hover:bg-muted text-red-600 text-left"
               >
                 Sign out
               </button>
