@@ -26,6 +26,7 @@ const ServerCard: React.FC<ServerCardProps> = ({
     createdAt: "",
     languages: [],
   });
+  
   const extractRepoDetails = (githubUrl: string) => {
     console.log("Extracting repo details from URL:", githubUrl);
     const match = githubUrl.match(/github\.com\/([^/]+)\/([^/]+)/);
