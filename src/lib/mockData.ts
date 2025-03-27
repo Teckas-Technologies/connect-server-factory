@@ -11,7 +11,7 @@ export interface ServerClient {
   rating: number;
   reviewCount: number;
   tags: string[];
-  github: string;
+  github?: string;
   website?:string;
   createdAt: string;
   author: {
@@ -6230,8 +6230,7 @@ export const servers: ServerClient[] = [
     rating: 4.4,
     reviewCount: 31,
     tags: ["website", "awesome-list", "curated"],
-    github: "",
-    website: "https://github.com/punkpeye/awesome-mcp-servers",
+    github: "https://github.com/punkpeye/awesome-mcp-servers",
     createdAt: "2022-04-22",
     author: {
       name: "Frank Fiegel",
@@ -6252,8 +6251,7 @@ export const servers: ServerClient[] = [
     rating: 4.4,
     reviewCount: 35,
     tags: ["website", "awesome-list", "curated"],
-    github: "",
-    website: "https://github.com/wong2/awesome-mcp-servers",
+    github: "https://github.com/wong2/awesome-mcp-servers",
     createdAt: "2022-06-15",
     author: {
       name: "wong2",
@@ -6475,26 +6473,26 @@ export const servers: ServerClient[] = [
   },
 
   // Tool 152 - Tool
-  {
-    id: "319",
-    name: "mcp.run",
-    description: "A hosted registry and control plane to install & run secure + portable MCP Servers",
-    type: "client",
-    category: "cloud",
-    sdkType: ["typescript"],
-    stars: 321,
-    rating: 4.7,
-    reviewCount: 53,
-    tags: ["hosted", "registry", "control-plane"],
-    github: "",
-    website: "https://mcp.run/",
-    createdAt: "2022-01-15",
-    author: {
-      name: "MCP Core Team",
-      avatar: "/placeholder.svg"
-    },
-    featured: true
-  },
+  // {
+  //   id: "319",
+  //   name: "mcp.run",
+  //   description: "A hosted registry and control plane to install & run secure + portable MCP Servers",
+  //   type: "client",
+  //   category: "cloud",
+  //   sdkType: ["typescript"],
+  //   stars: 321,
+  //   rating: 4.7,
+  //   reviewCount: 53,
+  //   tags: ["hosted", "registry", "control-plane"],
+  //   github: "",
+  //   website: "https://mcp.run/",
+  //   createdAt: "2022-01-15",
+  //   author: {
+  //     name: "MCP Core Team",
+  //     avatar: "/placeholder.svg"
+  //   },
+  //   featured: true
+  // },
 
   // Tool 153 - Tool
   {
@@ -6508,7 +6506,7 @@ export const servers: ServerClient[] = [
     rating: 4.4,
     reviewCount: 35,
     tags: ["cross-platform", "gui", "management"],
-    github: "",
+    github: "https://github.com/dcSpark/mcp-dockmaster",
     website: "https://mcp-dockmaster.com/",
     createdAt: "2022-06-22",
     author: {
@@ -6530,7 +6528,7 @@ export const servers: ServerClient[] = [
     rating: 4.3,
     reviewCount: 27,
     tags: ["registry", "hosted", "ai-agents"],
-    github: "",
+    github: "https://github.com/mkinf-io/mkinf",
     website: "https://mkinf.io/",
     createdAt: "2022-05-08",
     author: {
@@ -6628,26 +6626,26 @@ export const servers: ServerClient[] = [
   },
 
   // Tool 159 - Community
-  {
-    id: "326",
-    name: "r/modelcontextprotocol",
-    description: "A Model Context Protocol community Reddit page - discuss ideas, get answers to your questions, network with like-minded people, and showcase your projects! by Alex Andru",
-    type: "client",
-    category: "client",
-    sdkType: [],
-    stars: 0,
-    rating: 0,
-    reviewCount: 0,
-    tags: ["reddit", "community", "discussion"],
-    github: "",
-    website: "https://www.reddit.com/r/modelcontextprotocol/",
-    createdAt: "2022-05-19",
-    author: {
-      name: "Alex Andru",
-      avatar: "/placeholder.svg"
-    },
-    featured: false
-  },
+  // {
+  //   id: "326",
+  //   name: "r/modelcontextprotocol",
+  //   description: "A Model Context Protocol community Reddit page - discuss ideas, get answers to your questions, network with like-minded people, and showcase your projects! by Alex Andru",
+  //   type: "client",
+  //   category: "client",
+  //   sdkType: [],
+  //   stars: 0,
+  //   rating: 0,
+  //   reviewCount: 0,
+  //   tags: ["reddit", "community", "discussion"],
+  //   github: "",
+  //   website: "https://www.reddit.com/r/modelcontextprotocol/",
+  //   createdAt: "2022-05-19",
+  //   author: {
+  //     name: "Alex Andru",
+  //     avatar: "/placeholder.svg"
+  //   },
+  //   featured: false
+  // },
 
   // Tool 160 - Resource
   // {
