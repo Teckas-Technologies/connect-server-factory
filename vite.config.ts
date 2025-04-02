@@ -16,11 +16,23 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
-    base: "./",
+    base: "/",  // 🆕 Change from "./" to "/" for correct asset resolution
+    publicDir: "public",  // 🆕 Ensures assets are properly served in production
     server: {
       host: "::",
       port: 8080,
       historyApiFallback: true
+    },
+    build: {
+      outDir: "dist",
+      assetsDir: "assets",  // 🆕 Ensure assets are placed in the correct folder
+      rollupOptions: {
+        output: {
+          entryFileNames: "assets/[name]-[hash].js",  // 🆕 Add hashing for cache busting
+          chunkFileNames: "assets/[name]-[hash].js",
+          assetFileNames: "assets/[name]-[hash].[ext]"
+        }
+      }
     },
     plugins: [
       react(),
