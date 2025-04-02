@@ -1,6 +1,6 @@
 {
     "rewrites": [
-      { "source": "/server/(.*)", "destination": "/server/index.html" },
+      { "source": "/server/:id", "destination": "/index.html" },
       { "source": "/(.*)", "destination": "/index.html" }
     ]
   }
