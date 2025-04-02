@@ -2,6 +2,20 @@
     "rewrites": [
       { "source": "/server/:id", "destination": "/index.html" },
       { "source": "/(.*)", "destination": "/index.html" }
+    ],
+    "headers": [
+      {
+        "source": "/assets/(.*).js",
+        "headers": [
+          { "key": "Content-Type", "value": "application/javascript" }
+        ]
+      },
+      {
+        "source": "/assets/(.*).css",
+        "headers": [
+          { "key": "Content-Type", "value": "text/css" }
+        ]
+      }
     ]
   }
   
