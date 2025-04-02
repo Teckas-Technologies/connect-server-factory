@@ -220,7 +220,7 @@ export const servers: ServerClient[] = [
       name: 'Git Maintainers',
       avatar: '/git-avatar.svg'
     },
-    featured: true
+    featured: false
   },
   {
     id: '8',
@@ -239,7 +239,7 @@ export const servers: ServerClient[] = [
       name: 'GitHub Team',
       avatar: '/github-avatar.svg'
     },
-    featured: true
+    featured: false
   },
   {
     id: '9',
@@ -410,7 +410,7 @@ export const servers: ServerClient[] = [
       name: 'Slack Team',
       avatar: '/slack-avatar.svg'
     },
-    featured: true
+    featured: false
   },
   {
     id: '18',
@@ -1170,7 +1170,7 @@ export const servers: ServerClient[] = [
       name: 'Logfire',
       avatar: '/placeholder.svg'
     },
-    featured: true
+    featured: false
   },
   {
     id: '58',
@@ -1398,7 +1398,7 @@ export const servers: ServerClient[] = [
       name: 'Oxylabs',
       avatar: '/placeholder.svg'
     },
-    featured: true
+    featured: false
   },
   {
     id: '70',
@@ -1569,7 +1569,7 @@ export const servers: ServerClient[] = [
       name: 'Stripe',
       avatar: '/placeholder.svg'
     },
-    featured: true
+    featured: false
   },
   {
     id: '78',
@@ -2044,7 +2044,7 @@ export const servers: ServerClient[] = [
       name: "GoPlausible",
       avatar: "/avatars/goplausible.png"
     },
-    featured: true
+    featured: false
   },
   {
     id: "103",
@@ -2234,7 +2234,7 @@ export const servers: ServerClient[] = [
       name: 'Chroma Team',
       avatar: '/avatars/chroma.png'
     },
-    featured: true
+    featured: false
   },
   {
     id: '113',
@@ -2310,7 +2310,7 @@ export const servers: ServerClient[] = [
       name: 'LLM Tools',
       avatar: '/avatars/llmtools.png'
     },
-    featured: true
+    featured: false
   },
   {
     id: '117',
@@ -2823,7 +2823,7 @@ export const servers: ServerClient[] = [
       name: "EVM Team",
       avatar: "/evm-avatar.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "144",
@@ -2975,7 +2975,7 @@ export const servers: ServerClient[] = [
       name: 'Firebase Team',
       avatar: '/placeholder.svg'
     },
-    featured: true
+    featured: false
   },
   {
     id: '152',
@@ -3013,7 +3013,7 @@ export const servers: ServerClient[] = [
       name: 'FlightRadar Team',
       avatar: '/placeholder.svg'
     },
-    featured: true
+    featured: false
   },
   {
     id: '154',
@@ -3051,7 +3051,7 @@ export const servers: ServerClient[] = [
       name: 'GitHub Actions Team',
       avatar: '/placeholder.svg'
     },
-    featured: true
+    featured: false
   },
   {
     id: "156",
@@ -3146,7 +3146,7 @@ export const servers: ServerClient[] = [
       name: "GOAT Team",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "161",
@@ -3165,7 +3165,7 @@ export const servers: ServerClient[] = [
       name: "Godot Engine",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "162",
@@ -3298,7 +3298,7 @@ export const servers: ServerClient[] = [
       name: "GraphQL Foundation",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "169",
@@ -3336,7 +3336,7 @@ export const servers: ServerClient[] = [
       name: "Heurist Labs",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "171",
@@ -3374,7 +3374,7 @@ export const servers: ServerClient[] = [
       name: "Home Assistant",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "173",
@@ -3431,7 +3431,7 @@ export const servers: ServerClient[] = [
       name: "HuggingFace",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "176",
@@ -3526,7 +3526,7 @@ export const servers: ServerClient[] = [
       name: "Intercom",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "181",
@@ -3621,7 +3621,7 @@ export const servers: ServerClient[] = [
       name: "Keycloak",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "185",
@@ -3697,7 +3697,7 @@ export const servers: ServerClient[] = [
       name: "Red Hat",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "189",
@@ -3906,7 +3906,7 @@ export const servers: ServerClient[] = [
       name: "MCP Dev Team",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "200",
@@ -3944,7 +3944,7 @@ export const servers: ServerClient[] = [
       name: "Kubernetes Team",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "202",
@@ -4153,7 +4153,7 @@ export const servers: ServerClient[] = [
       name: "MongoDB Inc.",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "212",
@@ -4362,7 +4362,7 @@ export const servers: ServerClient[] = [
       name: "Neovim Team",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "223",
@@ -4564,7 +4564,7 @@ export const servers: ServerClient[] = [
       name: "OpenAI",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
 
   // Tool 61
@@ -4774,7 +4774,7 @@ export const servers: ServerClient[] = [
       name: "Pinecone",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
 
   // Tool 71
@@ -4879,7 +4879,7 @@ export const servers: ServerClient[] = [
       name: "Prometheus",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
 
   // Tool 76
@@ -5066,7 +5066,7 @@ export const servers: ServerClient[] = [
       name: "Redis",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
 
   // Tool 85
@@ -5192,7 +5192,7 @@ export const servers: ServerClient[] = [
       name: "Salesforce",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
 
   // Tool 91
@@ -5360,7 +5360,7 @@ export const servers: ServerClient[] = [
       name: "Spotify",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
 
   // Tool 99
@@ -5463,7 +5463,7 @@ export const servers: ServerClient[] = [
       name: "CLI Tools Team",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
 
   // Tool 104
@@ -5988,7 +5988,7 @@ export const servers: ServerClient[] = [
       name: "Google",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
   {
     id: "301",
@@ -6028,7 +6028,7 @@ export const servers: ServerClient[] = [
       name: "Tadata",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
 
   // Tool 131 - Server Framework
@@ -6215,7 +6215,7 @@ export const servers: ServerClient[] = [
       name: "Stephen Akinyemi",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
 
   // Tool 140 - Community Resource (Website)
@@ -6406,7 +6406,7 @@ export const servers: ServerClient[] = [
       name: "Michael Latman",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
 
   // Tool 149 - Tool
@@ -6578,7 +6578,7 @@ export const servers: ServerClient[] = [
       name: "opentoolsteam",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   },
 
   // Tool 157 - Community Resource
@@ -6686,7 +6686,7 @@ export const servers: ServerClient[] = [
       name: "gching",
       avatar: "/placeholder.svg"
     },
-    featured: true
+    featured: false
   }
 ];
 
