@@ -90,7 +90,6 @@ const ServerCard: React.FC<ServerCardProps> = ({
       }
     }
   }, [server.github]);
-  console.log("GitHub Token:", import.meta.env.VITE_GITHUB_TOKEN);
 
   return (
     <div
