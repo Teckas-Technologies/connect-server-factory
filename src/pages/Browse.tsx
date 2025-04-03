@@ -1,300 +1,284 @@
-import React, { useState, useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import PageTransition from "@/components/PageTransition";
-import SearchFilters from "@/components/SearchFilters";
-import ServerGrid from "@/components/ServerGrid";
-import { servers, categories } from "@/lib/mockData";
+
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Search, Filter, Database, Server, ArrowDownWideNarrow, ArrowUpWideNarrow, User } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-interface RepoData {
-  id: string;
-  stars: number;
-  createdAt: string;
-}
-
-const extractRepoDetails = (githubUrl: string) => {
-  const match = githubUrl.match(/github\.com\/([^/]+)\/([^/]+)/);
-  return match ? { owner: match[1], repo: match[2] } : null;
-};
+import PageTransition from '@/components/PageTransition';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import SearchFilters from '@/components/SearchFilters';
+import ServerGrid from '@/components/ServerGrid';
+import FeatureRequests from '@/components/FeatureRequests';
+import ServerRemixBuilder from '@/components/ServerRemixBuilder';
+import { servers, categories } from '@/lib/mockData';
+import { semanticSearch, precomputeEmbeddings } from '@/lib/semanticSearch';
+import { ServerClient } from '@/lib/types';
 
 const Browse = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [filteredServers, setFilteredServers] = useState(servers);
-  const [activeTab, setActiveTab] = useState<string>("all");
-  const [repoData, setRepoData] = useState<RepoData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
-
-  // Get category and sort from URL params
-  const searchQuery = searchParams.get("search")?.toLowerCase() || "";
-  const categoryParam = searchParams.get("category");
-  const sortParam = searchParams.get("sort") || "recent";
-
-  // Fetch GitHub data for all servers
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useState(new URLSearchParams(location.search));
+  const [searchValue, setSearchValue] = useState(searchParams.get('search') || '');
+  const [activeCategoryId, setActiveCategoryId] = useState<string | null>(searchParams.get('category'));
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
+  const [sortBy, setSortBy] = useState<string>('recent');
+  const [page, setPage] = useState<string>('servers');
+  const [serversWithEmbeddings, setServersWithEmbeddings] = useState<ServerClient[]>([]);
+  const [filteredServers, setFilteredServers] = useState<ServerClient[]>([]);
+  
+  // Initialize with embeddings
   useEffect(() => {
-    const fetchRepoData = async () => {
-      setIsLoading(true);
-      const headers = {
-        Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`,
-        Accept: "application/vnd.github.v3+json",
-      };
-
-      try {
-        const fetchedData = await Promise.all(
-          servers
-            .filter((server) => server.github)
-            .map(async (server) => {
-              const details = extractRepoDetails(server.github);
-              if (!details) return null;
-
-              try {
-                const res = await fetch(
-                  `https://api.github.com/repos/${details.owner}/${details.repo}`,
-                  { headers }
-                );
-                const data = await res.json();
-                return {
-                  id: server.id,
-                  stars: data.stargazers_count || 0,
-                  createdAt: data.created_at,
-                };
-              } catch (error) {
-                console.error("Error fetching GitHub data:", error);
-                return {
-                  id: server.id,
-                  stars: 0,
-                  createdAt: new Date().toISOString(),
-                };
-              }
-            })
-        );
-
-        setRepoData(fetchedData.filter(Boolean) as RepoData[]);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchRepoData();
+    const enhancedServers = precomputeEmbeddings(servers);
+    setServersWithEmbeddings(enhancedServers);
   }, []);
-
-  // Filter and sort servers based on all criteria
+  
   useEffect(() => {
-    if (isLoading) return;
-
-    let result = [...servers];
-
-    // Category filter
-    if (categoryParam) {
-      const category = categories.find((cat) => cat.id === categoryParam);
-      if (category) {
-        result = result.filter((server) => server.category === categoryParam);
-      }
+    // Parse search parameters whenever the location changes
+    const params = new URLSearchParams(location.search);
+    setSearchParams(params);
+    
+    const search = params.get('search');
+    const category = params.get('category');
+    
+    if (search) setSearchValue(search);
+    if (category) setActiveCategoryId(category);
+  }, [location]);
+  
+  useEffect(() => {
+    let results: ServerClient[] = [...serversWithEmbeddings];
+    
+    // Apply category filter
+    if (activeCategoryId) {
+      results = results.filter(server => server.category === activeCategoryId);
     }
-
-    // Search query
-    if (searchQuery) {
-      result = result.filter(
-        (server) =>
-          server.name.toLowerCase().includes(searchQuery) ||
-          server.description.toLowerCase().includes(searchQuery) ||
-          server.tags.some((tag) => tag.toLowerCase().includes(searchQuery)) ||
-          server.sdkType.some((sdk) => sdk.toLowerCase().includes(searchQuery))
-      );
-    }
-
-    // Checkbox filters
-    const filterParam = searchParams.get("filters");
-    if (filterParam) {
-      const filters = filterParam.split(",");
-      result = result.filter((server) => {
-        return filters.some((filter) => {
+    
+    // Apply tag/type filters
+    if (activeFilters.length > 0) {
+      results = results.filter(server => {
+        // Check if server matches ANY of the active filters
+        return activeFilters.some(filter => {
+          const lowerFilter = filter.toLowerCase();
           return (
-            server.category.toLowerCase() === filter ||
-            server.type.toLowerCase() === filter ||
-            server.sdkType.some((sdk) => sdk.toLowerCase() === filter)
+            server.tags.some(tag => tag.toLowerCase() === lowerFilter) ||
+            server.type.toLowerCase() === lowerFilter ||
+            server.category.toLowerCase() === lowerFilter
           );
         });
       });
     }
-
-    // Minimum rating filter
-    const minRatingParam = searchParams.get("minRating");
-    if (minRatingParam) {
-      const minRating = parseFloat(minRatingParam);
-      result = result.filter((server) => {
-        const repo = repoData.find((r) => r.id === server.id);
-        return repo ? repo.stars >= minRating : false;
-      });
+    
+    // Apply text search
+    if (searchValue) {
+      // Use semantic search when there's a search term
+      results = semanticSearch(searchValue, results);
     }
-
-    // Sorting
-    if (sortParam && repoData.length > 0) {
-      result = result.sort((a, b) => {
-        const repoA = repoData.find((r) => r.id === a.id);
-        const repoB = repoData.find((r) => r.id === b.id);
-
-        if (!repoA || !repoB) return 0;
-
-        switch (sortParam) {
-          case "rating":
-            return repoB.stars - repoA.stars;
-          case "recent":
-            return (
-              new Date(repoB.createdAt).getTime() -
-              new Date(repoA.createdAt).getTime()
-            );
-          default:
-            return 0;
-        }
-      });
-    }
-
-    setFilteredServers(result);
-  }, [
-    categoryParam,
-    searchQuery,
-    searchParams,
-    sortParam,
-    repoData,
-    isLoading,
-  ]);
-
-  useEffect(() => {
-    if (categoryParam) {
-      setActiveTab(categoryParam);
-    } else {
-      setActiveTab("all"); // Default tab when no category is set
-    }
-  }, [categoryParam]);
-
-  const handleTabChange = (value: string) => {
-    setActiveTab(value); // Update the state
-
-    if (value === "all") {
-      searchParams.delete("category");
-    } else {
-      searchParams.set("category", value);
-    }
-
-    setSearchParams(searchParams);
-  };
-
-  const handleSearch = (searchTerm: string) => {
-    if (searchTerm.trim() === "") {
-      searchParams.delete("search"); // Clear search param when empty
-    } else {
-      const matchedCategory = categories.find(
-        (cat) => cat.name.toLowerCase() === searchTerm.trim().toLowerCase()
+    
+    // Apply sorting
+    if (sortBy === 'recent') {
+      results = [...results].sort((a, b) => 
+        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
       );
-
-      if (matchedCategory) {
-        searchParams.set("category", matchedCategory.id);
-        searchParams.delete("search");
-        setActiveTab(matchedCategory.id);
-      } else {
-        searchParams.set("search", searchTerm.trim());
-        searchParams.delete("category");
-        setActiveTab("all");
-      }
+    } else if (sortBy === 'rating') {
+      // For demo purposes, using stars as a proxy for rating
+      results = [...results].sort((a, b) => (b.stars || 0) - (a.stars || 0));
     }
-    setSearchParams(searchParams);
+    
+    setFilteredServers(results);
+  }, [serversWithEmbeddings, searchValue, activeCategoryId, activeFilters, sortBy]);
+  
+  const handleSearch = (value: string) => {
+    setSearchValue(value);
+    
+    // Update URL params
+    const newParams = new URLSearchParams(searchParams);
+    if (value) {
+      newParams.set('search', value);
+    } else {
+      newParams.delete('search');
+    }
+    
+    // Use History API to update URL without reload
+    window.history.replaceState(null, '', `?${newParams.toString()}`);
   };
-
+  
   const handleFilter = (filters: string[]) => {
-    if (filters.length > 0) {
-      // Convert all filters to lowercase before setting them in the URL
-      const lowercaseFilters = filters.map((filter) => filter.toLowerCase());
-      searchParams.set("filters", lowercaseFilters.join(","));
-    } else {
-      searchParams.delete("filters");
-    }
-    setSearchParams(searchParams);
+    setActiveFilters(filters);
   };
-
-  const handleSort = (sort: string) => {
-    if (sort) {
-      searchParams.set("sort", sort);
-    } else {
-      searchParams.delete("sort");
-    }
-    setSearchParams(searchParams);
+  
+  const handleSort = (sortValue: string) => {
+    setSortBy(sortValue);
   };
-
+  
+  const selectCategory = (categoryId: string | null) => {
+    setActiveCategoryId(categoryId);
+    
+    // Update URL params
+    const newParams = new URLSearchParams(searchParams);
+    if (categoryId) {
+      newParams.set('category', categoryId);
+    } else {
+      newParams.delete('category');
+    }
+    
+    // Use History API to update URL without reload
+    window.history.replaceState(null, '', `?${newParams.toString()}`);
+  };
+  
   return (
     <PageTransition>
       <Navbar />
-
-      <main className="min-h-screen pt-24 pb-16 px-4 md:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">
-              {categoryParam
-                ? `Browse ${
-                    categories.find((c) => c.id === categoryParam)?.name || ""
-                  } Servers`
-                : searchQuery
-                ? `Search Results for "${searchQuery}"`
-                : "Browse MCP Servers & Clients"}
-            </h1>
-            <p className="text-muted-foreground">
-              {filteredServers.length}{" "}
-              {filteredServers.length === 1 ? "result" : "results"} found
-            </p>
-          </div>
-
-          <SearchFilters
-            onSearch={handleSearch}
-            onFilter={handleFilter}
-            onSort={handleSort}
-            initialValue=""
-          />
-
-          <Tabs
-            value={activeTab}
-            onValueChange={handleTabChange}
-            className="mb-8"
-          >
-            <div className="border-b mb-4 overflow-x-auto md:overflow-visible">
-              <TabsList className="bg-transparent p-0 h-auto flex md:block space-x-2 md:space-x-0">
-                <TabsTrigger
-                  value="all"
-                  className="py-2 px-4 rounded-none whitespace-nowrap data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary"
+      
+      <main className="min-h-screen py-24 px-4 md:px-8 max-w-7xl mx-auto">
+        <div className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">Browse the MCP Network</h1>
+          <p className="text-muted-foreground md:text-lg">
+            Discover and integrate MCP servers and clients for your projects
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-[250px_1fr] gap-8">
+          {/* Sidebar */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="font-medium mb-3">Categories</h3>
+              <div className="space-y-1">
+                <Button 
+                  variant={activeCategoryId === null ? "default" : "ghost"}
+                  className="justify-start w-full" 
+                  size="sm"
+                  onClick={() => selectCategory(null)}
                 >
-                  All
-                </TabsTrigger>
-                {categories.slice(0, 8).map((category) => (
-                  <TabsTrigger
+                  <Database className="mr-2 h-4 w-4" />
+                  All Categories
+                </Button>
+                
+                {categories.map(category => (
+                  <Button 
                     key={category.id}
-                    value={category.id}
-                    className="py-2 px-4 rounded-none whitespace-nowrap data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary"
+                    variant={activeCategoryId === category.id ? "default" : "ghost"}
+                    className="justify-start w-full" 
+                    size="sm"
+                    onClick={() => selectCategory(category.id)}
                   >
+                    <category.icon className="mr-2 h-4 w-4" />
                     {category.name}
-                  </TabsTrigger>
+                  </Button>
                 ))}
-              </TabsList>
+              </div>
             </div>
-
-            <TabsContent value={activeTab} className="mt-0">
-              {filteredServers.length > 0 ? (
-                <ServerGrid servers={filteredServers} columns={3} />
-              ) : (
-                <div className="text-center py-16">
-                  <h3 className="text-xl font-medium mb-2">No results found</h3>
-                  <p className="text-muted-foreground">
-                    Try adjusting your search or filter criteria
-                  </p>
-                </div>
-              )}
-            </TabsContent>
-          </Tabs>
+            
+            <div>
+              <h3 className="font-medium mb-3">Type</h3>
+              <div className="space-y-1">
+                <Button 
+                  variant={activeFilters.includes('server') ? "default" : "ghost"}
+                  className="justify-start w-full" 
+                  size="sm"
+                  onClick={() => {
+                    const newFilters = activeFilters.includes('server')
+                      ? activeFilters.filter(f => f !== 'server')
+                      : [...activeFilters, 'server'];
+                    handleFilter(newFilters);
+                  }}
+                >
+                  <Server className="mr-2 h-4 w-4" />
+                  Servers
+                </Button>
+                <Button 
+                  variant={activeFilters.includes('client') ? "default" : "ghost"}
+                  className="justify-start w-full" 
+                  size="sm"
+                  onClick={() => {
+                    const newFilters = activeFilters.includes('client')
+                      ? activeFilters.filter(f => f !== 'client')
+                      : [...activeFilters, 'client'];
+                    handleFilter(newFilters);
+                  }}
+                >
+                  <User className="mr-2 h-4 w-4" />
+                  Clients
+                </Button>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="font-medium mb-3">Sort</h3>
+              <div className="space-y-1">
+                <Button 
+                  variant={sortBy === 'recent' ? "default" : "ghost"}
+                  className="justify-start w-full" 
+                  size="sm"
+                  onClick={() => handleSort('recent')}
+                >
+                  <ArrowUpWideNarrow className="mr-2 h-4 w-4" />
+                  Most Recent
+                </Button>
+                <Button 
+                  variant={sortBy === 'rating' ? "default" : "ghost"}
+                  className="justify-start w-full" 
+                  size="sm"
+                  onClick={() => handleSort('rating')}
+                >
+                  <ArrowDownWideNarrow className="mr-2 h-4 w-4" />
+                  Highest Rated
+                </Button>
+              </div>
+            </div>
+          </div>
+          
+          {/* Main content */}
+          <div>
+            <SearchFilters 
+              onSearch={handleSearch} 
+              onFilter={handleFilter}
+              onSort={handleSort}
+              initialValue={searchValue}
+            />
+            
+            <Tabs defaultValue="servers" value={page} onValueChange={setPage} className="mt-6">
+              <TabsList>
+                <TabsTrigger value="servers">Servers</TabsTrigger>
+                <TabsTrigger value="remixes">Remixes</TabsTrigger>
+                <TabsTrigger value="requests">Feature Requests</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="servers" className="mt-6">
+                <ServerGrid 
+                  servers={filteredServers}
+                  columns={3}
+                />
+                
+                {filteredServers.length === 0 && (
+                  <div className="text-center py-16">
+                    <h3 className="text-xl font-medium mb-2">No servers found</h3>
+                    <p className="text-muted-foreground mb-8">
+                      Try adjusting your search or filter criteria
+                    </p>
+                    <Button 
+                      onClick={() => {
+                        handleSearch('');
+                        handleFilter([]);
+                        selectCategory(null);
+                      }}
+                    >
+                      Reset Filters
+                    </Button>
+                  </div>
+                )}
+              </TabsContent>
+              
+              <TabsContent value="remixes" className="mt-6">
+                <ServerRemixBuilder />
+              </TabsContent>
+              
+              <TabsContent value="requests" className="mt-6">
+                <FeatureRequests />
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
       </main>
-
+      
       <Footer />
     </PageTransition>
   );
