@@ -1,5 +1,4 @@
-
-import { Database, KeySquare, Lock, Cloud, Zap, Message, ChartBar, Coins, Brain, FileJson, Search, Code, Layers, Gauge, Workflow } from 'lucide-react';
+import { Database, KeySquare, Lock, Cloud, Zap, MessageSquare, ChartBar, Coins, Brain, FileJson, Search, Code, Layers, Gauge, Workflow } from 'lucide-react';
 import { ServerClient, Category, Review, FeatureRequest, ServerRemix } from './types';
 
 export const categories: Category[] = [
@@ -37,7 +36,7 @@ export const categories: Category[] = [
     id: 'messaging',
     name: 'Messaging',
     description: 'Tools for communication and messaging',
-    icon: Message
+    icon: MessageSquare
   },
   {
     id: 'analytics',
@@ -637,31 +636,198 @@ export const serverRemixes: ServerRemix[] = [
   }
 ];
 
-// Helper functions for the mock data
-export const getFeaturedServers = (): ServerClient[] => {
-  return servers.filter(server => server.featured);
-};
+// Setup instructions for servers
+export const serverSetupInstructions: Record<string, {
+  description: string;
+  features: string[];
+  tools: Array<{
+    name: string;
+    description: string;
+    inputs: Array<{
+      name: string;
+      type: string;
+      optional: boolean;
+      description: string;
+    }>
+  }>;
+  configuration: string;
+  usageExamples: {
+    docker?: string;
+    npx?: string;
+    pip?: string;
+  };
+  license: string;
+}> = {
+  "1": {
+    description: "Comprehensive setup guide for DatabaseMCP, a high-performance database server for MCP applications.",
+    features: [
+      "Multi-model database support",
+      "Horizontal scaling capabilities",
+      "Built-in caching layer",
+      "Real-time change notifications",
+      "Advanced query capabilities"
+    ],
+    tools: [
+      {
+        name: "Query",
+        description: "Execute database queries with support for filtering, sorting, and pagination",
+        inputs: [
+          {
+            name: "query",
+            type: "string",
+            optional: false,
+            description: "SQL or NoSQL query string"
+          },
+          {
+            name: "parameters",
+            type: "object",
+            optional: true,
+            description: "Query parameters for parameterized queries"
+          }
+        ]
+      },
+      {
+        name: "Transaction",
+        description: "Execute multiple operations in a single atomic transaction",
+        inputs: [
+          {
+            name: "operations",
+            type: "array",
+            optional: false,
+            description: "Array of operations to execute"
+          },
+          {
+            name: "options",
+            type: "object",
+            optional: true,
+            description: "Transaction options like isolation level"
+          }
+        ]
+      }
+    ],
+    configuration: `## Environment Variables
 
-export const getServerById = (id: string): ServerClient | undefined => {
-  return servers.find(server => server.id === id);
-};
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=your_user
+DB_PASSWORD=your_password
+DB_NAME=your_db_name
 
-export const getServersByCategory = (categoryId: string): ServerClient[] => {
-  return servers.filter(server => server.category === categoryId);
-};
+## Connection Pool Settings
 
-export const getServerReviews = (serverId: string): Review[] => {
-  return reviews.filter(review => review.server_id === serverId);
-};
+You can configure the connection pool by setting these parameters:
+- MAX_POOL_SIZE=20
+- CONNECTION_TIMEOUT=30000
+- IDLE_TIMEOUT=60000
 
-export const getFeatureRequestsByCategory = (categoryId: string): FeatureRequest[] => {
-  return featureRequests.filter(request => request.category === categoryId);
-};
+## Authentication
 
-export const getServerRemixById = (id: string): ServerRemix | undefined => {
-  return serverRemixes.find(remix => remix.id === id);
-};
+For secure connections, provide the following:
+- SSL_ENABLED=true
+- SSL_CA_CERT=/path/to/ca.pem
+- SSL_CLIENT_CERT=/path/to/client-cert.pem
+- SSL_CLIENT_KEY=/path/to/client-key.pem`,
+    usageExamples: {
+      docker: `docker run -d \\
+  -p 5432:5432 \\
+  -e DB_USER=admin \\
+  -e DB_PASSWORD=secure_password \\
+  -e MAX_POOL_SIZE=50 \\
+  -v db_data:/var/lib/postgresql/data \\
+  databasemcp/server:latest`,
+      npx: `npx @databasemcp/client connect \\
+  --host=localhost \\
+  --port=5432 \\
+  --user=admin \\
+  --password=secure_password \\
+  --database=my_database`,
+      pip: `pip install databasemcp-client
 
-export const getServersInRemix = (remix: ServerRemix): ServerClient[] => {
-  return servers.filter(server => remix.servers.includes(server.id));
-};
+# Python usage example
+from databasemcp import Client
+
+client = Client(
+    host="localhost",
+    port=5432,
+    user="admin",
+    password="secure_password",
+    database="my_database"
+)
+
+result = client.query("SELECT * FROM users WHERE age > ?", [21])`
+    },
+    license: "Apache License 2.0 - Free to use, modify, and distribute with proper attribution."
+  },
+  "3": {
+    description: "Comprehensive setup guide for CloudMCP, a cloud-native MCP server for distributed applications.",
+    features: [
+      "Seamless cloud provider integration (AWS, GCP, Azure)",
+      "Auto-scaling capabilities",
+      "Multi-region deployment",
+      "Built-in load balancing",
+      "Serverless function support"
+    ],
+    tools: [
+      {
+        name: "Deploy",
+        description: "Deploy MCP services to cloud environments",
+        inputs: [
+          {
+            name: "config",
+            type: "object",
+            optional: false,
+            description: "Deployment configuration"
+          },
+          {
+            name: "environment",
+            type: "string",
+            optional: true,
+            description: "Target environment (dev, staging, prod)"
+          }
+        ]
+      },
+      {
+        name: "Scale",
+        description: "Adjust scaling parameters for deployed services",
+        inputs: [
+          {
+            name: "service",
+            type: "string",
+            optional: false,
+            description: "Name of the service to scale"
+          },
+          {
+            name: "replicas",
+            type: "number",
+            optional: false,
+            description: "Number of replicas to run"
+          }
+        ]
+      }
+    ],
+    configuration: `## Cloud Provider Configuration
+
+CLOUD_PROVIDER=aws
+REGION=us-west-2
+ACCESS_KEY_ID=your_access_key
+SECRET_ACCESS_KEY=your_secret_key
+
+## Deployment Settings
+
+CLUSTER_NAME=mcp-cluster
+NAMESPACE=default
+AUTO_SCALING=true
+MIN_REPLICAS=2
+MAX_REPLICAS=10
+CPU_THRESHOLD=70
+
+## Networking
+
+USE_LOAD_BALANCER=true
+INGRESS_DOMAIN=your-app.example.com
+SSL_ENABLED=true`,
+    usageExamples: {
+      docker: `docker run -d \\
+  -p 8080:8080 \\
+  -e CLOUD_PROVIDER=aws \\
+  -
