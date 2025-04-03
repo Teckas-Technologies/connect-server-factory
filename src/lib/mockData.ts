@@ -748,7 +748,7 @@ from databasemcp import Client
 
 client = Client(
     host="localhost",
-    port=5432,
+    port="5432",
     user="admin",
     password="secure_password",
     database="my_database"
@@ -830,4 +830,3 @@ SSL_ENABLED=true`,
       docker: `docker run -d \\
   -p 8080:8080 \\
   -e CLOUD_PROVIDER=aws \\
-  -
