@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Search, Star, Users, Server, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ServerClient } from "@/lib/types";
-import { getFeaturedServers } from "@/lib/mockData";
+import { getFeaturedServers, ServerClient } from "@/lib/mockData";
 import { useSearchFocus } from "@/contexts/SearchFocusContext";
 import { servers, categories } from "@/lib/mockData";
 const Hero: React.FC = () => {

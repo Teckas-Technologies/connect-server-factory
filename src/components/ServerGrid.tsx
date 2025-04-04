@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from 'react';
-import { ServerClient } from '@/lib/types';
+import { ServerClient } from '@/lib/mockData';
 import ServerCard from './ServerCard';
 import { cn } from '@/lib/utils';
 

@@ -1,469 +1,667 @@
+import React, { useEffect } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { 
-  Star, 
-  ArrowLeft, 
-  Github, 
-  Globe, 
-  FileText, 
-  Download, 
+import {
+  ArrowLeft,
+  Star,
+  Github,
+  Eye,
+  Share2,
   Heart,
-  Server as ServerIcon,
-  Users,
+  MessageSquare,
   Calendar,
-  CheckCircle,
+  Tag,
+  Code,
   Copy,
-  Tag
-} from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { useToast } from "@/hooks/use-toast";
-import PageTransition from '@/components/PageTransition';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import ServerReviews from '@/components/ServerReviews';
-import ServerGrid from '@/components/ServerGrid';
-import { getServerById, servers, categories } from '@/lib/mockData';
-import { calculateAverageRating, formatDate } from '@/lib/utils';
-import { getServerReviews } from '@/lib/mockData';
+  Terminal,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getServerById, getTopRatedServers } from "@/lib/mockData";
+import PageTransition from "@/components/PageTransition";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ServerGrid from "@/components/ServerGrid";
+import { useState, useRef } from "react";
 
 const ServerDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const { toast } = useToast();
-  const [server, setServer] = useState(getServerById(id || ''));
+  const navigate = useNavigate();
+  const server = getServerById(id || "");
+  const [showSharePopup, setShowSharePopup] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [repoData, setRepoData] = useState<{
     stars: number;
-    forks: number;
     createdAt: string;
-    updatedAt: string;
     languages: string[];
+    readme: string;
   }>({
     stars: 0,
-    forks: 0,
-    createdAt: '',
-    updatedAt: '',
-    languages: []
+    createdAt: "",
+    languages: [],
+    readme: "",
   });
-  const [isFavorited, setIsFavorited] = useState(false);
-  const [activeTab, setActiveTab] = useState('overview');
-  
-  const reviews = id ? getServerReviews(id) : [];
-  const averageRating = calculateAverageRating(reviews);
-  
-  const relatedServers = server 
-    ? servers.filter(s => 
-        s.id !== server.id && (
-          s.category === server.category || 
-          s.tags.some(tag => server.tags.includes(tag))
-        )
-      ).slice(0, 4)
-    : [];
-  
-  const category = server ? categories.find(c => c.id === server.category) : undefined;
-  
+  const popupRef = useRef<HTMLDivElement>(null);
+  const pageUrl = window.location.href;
+  const handleCopy = () => {
+    navigator.clipboard.writeText(pageUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+  };
   useEffect(() => {
-    if (server?.github) {
-      // In a real application, this would fetch actual repository data
-      // For the demo, we'll set mock values based on the server data
-      setRepoData({
-        stars: server.stars || Math.floor(Math.random() * 2000) + 100,
-        forks: Math.floor(Math.random() * 500) + 10,
-        createdAt: server.created_at,
-        updatedAt: server.updated_at,
-        languages: ['TypeScript', 'JavaScript', 'Python'].sort(() => Math.random() - 0.5).slice(0, 2)
-      });
+    if (server.github) {
+      const { owner, repo } = extractRepoDetails(server.github);
+      if (owner && repo) {
+        console.log(`Fetching repo data from GitHub: ${owner}/${repo}`);
+
+        const headers = {
+          Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`,
+          Accept: "application/vnd.github.v3+json",
+        };
+
+        // Fetch repository details
+        fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers })
+          .then((res) => res.json())
+          .then((data) => {
+            setRepoData((prev) => ({
+              ...prev,
+              stars: data.stargazers_count || 0,
+              createdAt: new Date(data.created_at).toLocaleDateString(),
+            }));
+          })
+          .catch((error) =>
+            console.error("Error fetching repo details:", error)
+          );
+
+        // Fetch repository languages
+        fetch(`https://api.github.com/repos/${owner}/${repo}/languages`, {
+          headers,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setRepoData((prev) => ({
+              ...prev,
+              languages: Object.keys(data),
+            }));
+          })
+          .catch((error) => console.error("Error fetching languages:", error));
+
+        // Fetch repository README
+        fetch(`https://api.github.com/repos/${owner}/${repo}/readme`, {
+          headers,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.content) {
+              const decodedReadme = atob(data.content);
+              setRepoData((prev) => ({
+                ...prev,
+                readme: decodedReadme,
+              }));
+            }
+          })
+          .catch((error) => console.error("Error fetching README:", error));
+      }
     }
-  }, [server]);
-  
+  }, [server.github]);
   if (!server) {
     return (
-      <PageTransition>
-        <Navbar />
-        <main className="min-h-screen py-24 px-4 md:px-8 max-w-7xl mx-auto">
-          <div className="text-center py-16">
-            <h2 className="text-2xl font-bold mb-4">Server not found</h2>
-            <p className="text-muted-foreground mb-8">
-              The server you're looking for doesn't exist or has been removed.
-            </p>
-            <Button asChild>
-              <Link to="/browse">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Browse
-              </Link>
-            </Button>
-          </div>
-        </main>
-        <Footer />
-      </PageTransition>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Server Not Found</h1>
+          <Button asChild variant="outline">
+            <Link to="/browse">Browse All Servers</Link>
+          </Button>
+        </div>
+      </div>
     );
   }
-  
-  const handleFavorite = () => {
-    setIsFavorited(!isFavorited);
-    
-    toast({
-      title: isFavorited ? "Removed from favorites" : "Added to favorites",
-      description: isFavorited 
-        ? "The server has been removed from your favorites" 
-        : "The server has been added to your favorites"
-    });
-  };
-  
-  const handleCopyEndpoint = () => {
-    if (server.deployment_url) {
-      navigator.clipboard.writeText(server.deployment_url);
-      
-      toast({
-        title: "Endpoint copied",
-        description: "The server endpoint has been copied to your clipboard"
-      });
+
+  const extractRepoDetails = (githubUrl: string) => {
+    console.log("Extracting repo details from URL:", githubUrl);
+    const match = githubUrl.match(/github\.com\/([^/]+)\/([^/]+)/);
+    if (match) {
+      console.log(
+        "Extracted owner-----------------",
+        match[1],
+        "Extracted repo---------",
+        match[2]
+      );
+      return { owner: match[1], repo: match[2] };
     }
+    console.warn("Failed to extract repo details from:", githubUrl);
+    return { owner: "", repo: "" };
   };
-  
+
+  // Mock star rating
+  const StarRating = ({ rating }: { rating: number }) => {
+    return (
+      <div className="flex">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <Star
+            key={star}
+            className={`h-5 w-5 ${
+              star <= Math.floor(rating)
+                ? "fill-yellow-400 text-yellow-400"
+                : "text-gray-300"
+            }`}
+          />
+        ))}
+      </div>
+    );
+  };
+
+  // Sample code snippets
+  const typescriptSnippet = `import { create${
+    server.name
+  } } from "${server.name.toLowerCase()}";
+
+const client = create${server.name}({
+  apiKey: process.env.API_KEY,
+  options: { /* your configuration */ }
+});
+
+// Example usage
+const response = await client.connect();
+console.log(response);`;
+
+  const pythonSnippet = `from ${server.name.toLowerCase()} import create_client
+
+client = create_client(
+    api_key=os.environ.get("API_KEY"),
+    options={ # your configuration
+        "timeout": 30,
+        "retry": True
+    }
+)
+
+# Example usage
+response = client.connect()
+print(response)`;
+
+  // Related servers
+  const relatedServers = getTopRatedServers()
+    .filter((s) => s.id !== server.id)
+    .slice(0, 3);
+
   return (
     <PageTransition>
       <Navbar />
-      
-      <main className="min-h-screen py-24 px-4 md:px-8 max-w-7xl mx-auto">
-        {/* Breadcrumbs */}
-        <div className="mb-8">
-          <Button variant="ghost" size="sm" asChild className="pl-0">
-            <Link to="/browse">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Browse
-            </Link>
+
+      <main className="min-h-screen pt-24 pb-16 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="mb-6"
+            onClick={() => navigate(-1)}
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back
           </Button>
-        </div>
-        
-        <div className="grid md:grid-cols-[2fr_1fr] gap-8">
-          {/* Main Content */}
-          <div className="space-y-8">
-            {/* Header */}
-            <div>
-              <div className="flex items-center gap-3 mb-3">
-                <Badge>
-                  {server.type === 'server' ? 'Server' : 'Client'}
-                </Badge>
-                
-                {server.verified && (
-                  <Badge variant="outline" className="border-green-200 bg-green-50 text-green-700">
-                    <CheckCircle className="h-3 w-3 mr-1" />
-                    Verified
-                  </Badge>
-                )}
-                
-                {server.featured && (
-                  <Badge variant="secondary">Featured</Badge>
-                )}
-              </div>
-              
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">{server.name}</h1>
-              
-              <p className="text-lg md:text-xl text-muted-foreground mb-6">
-                {server.description}
-              </p>
-              
-              <div className="flex flex-wrap gap-3 mb-6">
-                {server.tags.map((tag) => (
-                  <Badge key={tag} variant="outline" className="text-muted-foreground">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-              
-              <div className="flex flex-wrap gap-4">
-                {server.github && (
-                  <Button variant="outline" asChild>
-                    <a href={server.github} target="_blank" rel="noopener noreferrer">
-                      <Github className="mr-2 h-4 w-4" />
-                      GitHub
-                    </a>
-                  </Button>
-                )}
-                
-                {server.website && (
-                  <Button variant="outline" asChild>
-                    <a href={server.website} target="_blank" rel="noopener noreferrer">
-                      <Globe className="mr-2 h-4 w-4" />
-                      Website
-                    </a>
-                  </Button>
-                )}
-                
-                {server.documentation && (
-                  <Button variant="outline" asChild>
-                    <a href={server.documentation} target="_blank" rel="noopener noreferrer">
-                      <FileText className="mr-2 h-4 w-4" />
-                      Documentation
-                    </a>
-                  </Button>
-                )}
-                
-                <Button onClick={handleFavorite} variant={isFavorited ? "default" : "outline"}>
-                  <Heart className={`mr-2 h-4 w-4 ${isFavorited ? 'fill-primary-foreground' : ''}`} />
-                  {isFavorited ? "Favorited" : "Favorite"}
-                </Button>
-              </div>
-            </div>
-            
-            {/* Tabs */}
-            <Tabs defaultValue="overview" value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="reviews">Reviews</TabsTrigger>
-                <TabsTrigger value="integration">Integration</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="overview" className="space-y-6 pt-6">
-                {server.longDescription && (
-                  <div className="prose max-w-none">
-                    <h2 className="text-2xl font-semibold mb-4">About</h2>
-                    <p className="text-base">{server.longDescription}</p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main content */}
+            <div className="lg:col-span-2 space-y-8">
+              <div className="bg-white border border-border/40 rounded-xl shadow-sm p-6 md:p-8">
+                <div className="flex items-start justify-between mb-6">
+                  <div>
+                    <h1 className="text-3xl font-bold mb-2">{server.name}</h1>
+                    <div className="flex items-center text-sm text-muted-foreground">
+                      <span>By {server.author.name}</span>
+                      <span className="mx-2">•</span>
+                      <span className="capitalize">{server.type}</span>
+                    </div>
                   </div>
-                )}
-                
-                <div>
-                  <h2 className="text-2xl font-semibold mb-4">Features</h2>
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3">
-                      <div className="bg-primary/10 text-primary p-2 rounded-md mt-1">
-                        <ServerIcon className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <h3 className="font-medium">MCP Protocol Compliant</h3>
-                        <p className="text-muted-foreground">
-                          Fully compliant with the Model Context Protocol standard for seamless integration.
-                        </p>
-                      </div>
-                    </li>
-                    
-                    <li className="flex items-start gap-3">
-                      <div className="bg-primary/10 text-primary p-2 rounded-md mt-1">
-                        <CheckCircle className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <h3 className="font-medium">{server.hosted ? 'Hosted Solution' : 'Self-Hosted Option'}</h3>
-                        <p className="text-muted-foreground">
-                          {server.hosted 
-                            ? 'Fully managed and hosted on the MCP Network for reliability and performance.' 
-                            : 'Flexible self-hosted deployment options for maximum control.'}
-                        </p>
-                      </div>
-                    </li>
-                    
-                    <li className="flex items-start gap-3">
-                      <div className="bg-primary/10 text-primary p-2 rounded-md mt-1">
-                        <Tag className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <h3 className="font-medium">{server.category === 'ai' ? 'AI-Powered Capabilities' : `${category?.name} Specialized`}</h3>
-                        <p className="text-muted-foreground">
-                          {server.category === 'ai' 
-                            ? 'Advanced AI features for intelligent data processing and analysis.' 
-                            : `Specialized ${category?.name.toLowerCase()} features optimized for ${category?.name.toLowerCase()} workloads.`}
-                        </p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                
-                {relatedServers.length > 0 && (
-                  <div className="pt-6">
-                    <h2 className="text-2xl font-semibold mb-6">Related Servers</h2>
-                    <ServerGrid 
-                      servers={relatedServers}
-                      columns={2}
-                    />
-                  </div>
-                )}
-              </TabsContent>
-              
-              <TabsContent value="reviews" className="pt-6">
-                <ServerReviews server={server} />
-              </TabsContent>
-              
-              <TabsContent value="integration" className="pt-6">
-                <h2 className="text-2xl font-semibold mb-4">Integration Guide</h2>
-                
-                <div className="space-y-6">
-                  {server.hosted && server.deployment_url && (
-                    <div className="space-y-3">
-                      <h3 className="text-lg font-medium">Endpoint</h3>
-                      <div className="flex items-center gap-2">
-                        <div className="bg-muted p-3 rounded-md flex-1 font-mono text-sm truncate">
-                          {server.deployment_url}
+
+                  <div className="flex gap-2 relative">
+                    {/* <Button variant="outline" size="icon">
+          <Heart className="h-5 w-5" />
+        </Button> */}
+
+                    <div className="relative">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => setShowSharePopup((prev) => !prev)}
+                      >
+                        <Share2 className="h-5 w-5" />
+                      </Button>
+
+                      {showSharePopup && (
+                        <div
+                          ref={popupRef}
+                          className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-md p-3 z-10"
+                        >
+                          <p className="text-sm font-medium text-[#2563EB] mb-2 break-all">
+                            {pageUrl}
+                          </p>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={handleCopy}
+                            className="w-full flex items-center justify-center"
+                          >
+                            <Copy className="h-4 w-4 mr-2" />
+                            {copied ? "Copied!" : "Copy Link"}
+                          </Button>
                         </div>
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button variant="outline" size="icon" onClick={handleCopyEndpoint}>
-                                <Copy className="h-4 w-4" />
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Copy endpoint</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      </div>
-                    </div>
-                  )}
-                  
-                  <div className="space-y-3">
-                    <h3 className="text-lg font-medium">Installation</h3>
-                    <div className="bg-muted p-4 rounded-md">
-                      <pre className="font-mono text-sm whitespace-pre-wrap">
-                        npm install {server.name.toLowerCase().replace(/\s+/g, '-')}
-                      </pre>
+                      )}
                     </div>
                   </div>
-                  
-                  <div className="space-y-3">
-                    <h3 className="text-lg font-medium">Basic Usage</h3>
-                    <div className="bg-muted p-4 rounded-md">
-                      <pre className="font-mono text-sm whitespace-pre-wrap">
-{`import { ${server.name} } from '${server.name.toLowerCase().replace(/\s+/g, '-')}';
+                </div>
 
-// Initialize the client
-const client = new ${server.name}({
-  endpoint: '${server.deployment_url || 'https://api.example.com/v1'}',
-  apiKey: 'YOUR_API_KEY'
-});
+                <p className="text-muted-foreground mb-6">
+                  {server.description}
+                </p>
 
-// Make a request
-const response = await client.process({
-  input: "Your input data here",
-  options: {
-    // Additional options
-  }
-});
-
-console.log(response);`}
-                      </pre>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    <h3 className="text-lg font-medium">Environment Variables</h3>
-                    <div className="bg-muted p-4 rounded-md">
-                      <pre className="font-mono text-sm whitespace-pre-wrap">
-{`# .env file
-${server.name.toUpperCase().replace(/\s+/g, '_')}_API_KEY=your_api_key_here
-${server.name.toUpperCase().replace(/\s+/g, '_')}_ENDPOINT=${server.deployment_url || 'https://api.example.com/v1'}`}
-                      </pre>
-                    </div>
-                  </div>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </div>
-          
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <div className="border rounded-xl p-6 bg-card">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="font-semibold text-lg">Server Info</h3>
-                <Badge variant={server.type === 'server' ? "default" : "secondary"}>
-                  {server.type === 'server' ? 'Server' : 'Client'}
-                </Badge>
-              </div>
-              
-              <div className="space-y-3">
-                <div className="flex items-center justify-between pb-3 border-b">
-                  <div className="text-muted-foreground">Author</div>
-                  <div className="font-medium">{server.author.name}</div>
-                </div>
-                
-                <div className="flex items-center justify-between pb-3 border-b">
-                  <div className="text-muted-foreground">Category</div>
-                  <div className="font-medium">{category?.name || server.category}</div>
-                </div>
-                
-                <div className="flex items-center justify-between pb-3 border-b">
-                  <div className="text-muted-foreground">Version</div>
-                  <div className="font-medium">{server.version || '1.0.0'}</div>
-                </div>
-                
-                <div className="flex items-center justify-between pb-3 border-b">
-                  <div className="text-muted-foreground">Created</div>
-                  <div className="font-medium">{formatDate(server.created_at)}</div>
-                </div>
-                
-                <div className="flex items-center justify-between pb-3 border-b">
-                  <div className="text-muted-foreground">Last Updated</div>
-                  <div className="font-medium">{formatDate(server.updated_at)}</div>
-                </div>
-                
-                <div className="flex items-center justify-between pb-3 border-b">
-                  <div className="text-muted-foreground">License</div>
-                  <div className="font-medium">MIT</div>
-                </div>
-              </div>
-              
-              <div className="mt-6">
-                <Button className="w-full">
-                  <Download className="mr-2 h-4 w-4" />
-                  Download
-                </Button>
-              </div>
-            </div>
-            
-            <div className="border rounded-xl p-6 bg-card">
-              <h3 className="font-semibold text-lg mb-4">Statistics</h3>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div className="border rounded-lg p-3 text-center">
-                  <div className="text-xl md:text-2xl font-bold">{server.stars || repoData.stars}</div>
-                  <div className="text-muted-foreground text-sm">Stars</div>
-                </div>
-                
-                <div className="border rounded-lg p-3 text-center">
-                  <div className="text-xl md:text-2xl font-bold">{repoData.forks}</div>
-                  <div className="text-muted-foreground text-sm">Forks</div>
-                </div>
-                
-                <div className="border rounded-lg p-3 text-center">
-                  <div className="text-xl md:text-2xl font-bold">{server.downloads || Math.floor(Math.random() * 10000) + 1000}</div>
-                  <div className="text-muted-foreground text-sm">Downloads</div>
-                </div>
-                
-                <div className="border rounded-lg p-3 text-center">
-                  <div className="text-xl md:text-2xl font-bold flex items-center justify-center">
-                    {averageRating.toFixed(1)}
-                    <Star className="h-5 w-5 text-yellow-400 ml-1" />
-                  </div>
-                  <div className="text-muted-foreground text-sm">Rating ({reviews.length})</div>
-                </div>
-              </div>
-              
-              <div className="mt-6">
-                <div className="text-muted-foreground text-sm mb-2">Languages</div>
-                <div className="flex flex-wrap gap-2">
-                  {repoData.languages.map(lang => (
-                    <Badge key={lang} variant="outline">
-                      {lang}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {server.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary">
+                      {tag}
                     </Badge>
                   ))}
                 </div>
+
+                <div className="flex justify-between gap-4 text-sm">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Star className="h-4 w-4 text-yellow-400" />
+                    <span>
+                      <strong className="text-foreground">
+                        {repoData.stars} Stars
+                      </strong>{" "}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Calendar className="h-4 w-4" />
+                    <span>
+                      Added {repoData.createdAt || "N/A"}{" "}
+                      {/* Changed to toLocaleString() */}
+                    </span>
+                  </div>
+                </div>
+
+                {/* <div className="mt-6 pt-6 border-t">
+                  <Button asChild className="w-full sm:w-auto">
+                    <Link to={`/server/${server.id}/setup`}>
+                      <Terminal className="mr-2 h-4 w-4" />
+                      View Setup Instructions
+                    </Link>
+                  </Button>
+                </div> */}
               </div>
+
+              <div className="bg-white border border-border/40 rounded-xl shadow-sm overflow-hidden">
+                <Tabs defaultValue="overview">
+                  <TabsList className="w-full justify-start px-6 pt-4 bg-transparent">
+                    <TabsTrigger value="overview" className="text-sm">
+                      Overview
+                    </TabsTrigger>
+                  </TabsList>
+
+                  <TabsContent
+                    value="overview"
+                    className="p-6 md:p-8 space-y-6"
+                  >
+                    {repoData.readme ? (
+                      <div className="markdown-body">
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          rehypePlugins={[rehypeRaw]}
+                        >
+                          {repoData.readme}
+                        </ReactMarkdown>
+                      </div>
+                    ) : (
+                      "No README available"
+                    )}
+                  </TabsContent>
+
+                  <TabsContent
+                    value="examples"
+                    className="p-6 md:p-8 space-y-6"
+                  >
+                    <div>
+                      <h2 className="text-xl font-semibold mb-4">
+                        Integration Examples
+                      </h2>
+                      <p className="text-muted-foreground mb-6">
+                        Use these code examples to quickly integrate{" "}
+                        {server.name} into your project.
+                      </p>
+
+                      <div className="space-y-4">
+                        <div>
+                          <div className="flex items-center justify-between mb-2">
+                            <h3 className="text-md font-medium">TypeScript</h3>
+                            <Button variant="ghost" size="sm">
+                              <Copy className="h-4 w-4 mr-1" />
+                              Copy
+                            </Button>
+                          </div>
+                          <div className="bg-gray-900 text-gray-100 p-4 rounded-md overflow-auto">
+                            <pre className="font-mono text-sm">
+                              <code>{typescriptSnippet}</code>
+                            </pre>
+                          </div>
+                        </div>
+
+                        <div>
+                          <div className="flex items-center justify-between mb-2">
+                            <h3 className="text-md font-medium">Python</h3>
+                            <Button variant="ghost" size="sm">
+                              <Copy className="h-4 w-4 mr-1" />
+                              Copy
+                            </Button>
+                          </div>
+                          <div className="bg-gray-900 text-gray-100 p-4 rounded-md overflow-auto">
+                            <pre className="font-mono text-sm">
+                              <code>{pythonSnippet}</code>
+                            </pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-lg font-semibold mb-3">
+                        Configuration Options
+                      </h3>
+                      <div className="border rounded-md overflow-hidden">
+                        <table className="min-w-full divide-y divide-border">
+                          <thead className="bg-muted/50">
+                            <tr>
+                              <th className="px-4 py-3 text-left text-sm font-medium">
+                                Option
+                              </th>
+                              <th className="px-4 py-3 text-left text-sm font-medium">
+                                Type
+                              </th>
+                              <th className="px-4 py-3 text-left text-sm font-medium">
+                                Default
+                              </th>
+                              <th className="px-4 py-3 text-left text-sm font-medium">
+                                Description
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody className="bg-white divide-y divide-border">
+                            <tr>
+                              <td className="px-4 py-3 text-sm font-medium">
+                                timeout
+                              </td>
+                              <td className="px-4 py-3 text-sm text-muted-foreground">
+                                number
+                              </td>
+                              <td className="px-4 py-3 text-sm text-muted-foreground">
+                                30
+                              </td>
+                              <td className="px-4 py-3 text-sm text-muted-foreground">
+                                Request timeout in seconds
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="px-4 py-3 text-sm font-medium">
+                                retry
+                              </td>
+                              <td className="px-4 py-3 text-sm text-muted-foreground">
+                                boolean
+                              </td>
+                              <td className="px-4 py-3 text-sm text-muted-foreground">
+                                true
+                              </td>
+                              <td className="px-4 py-3 text-sm text-muted-foreground">
+                                Enable automatic retry on failure
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="px-4 py-3 text-sm font-medium">
+                                maxRetries
+                              </td>
+                              <td className="px-4 py-3 text-sm text-muted-foreground">
+                                number
+                              </td>
+                              <td className="px-4 py-3 text-sm text-muted-foreground">
+                                3
+                              </td>
+                              <td className="px-4 py-3 text-sm text-muted-foreground">
+                                Maximum number of retry attempts
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="reviews" className="p-6 md:p-8">
+                    <div className="flex items-center justify-between mb-6">
+                      <h2 className="text-xl font-semibold">
+                        Reviews & Ratings
+                      </h2>
+                      <Button>
+                        <MessageSquare className="mr-2 h-4 w-4" />
+                        Write Review
+                      </Button>
+                    </div>
+
+                    <div className="space-y-6">
+                      <div className="flex items-start gap-6 pb-6 border-b">
+                        <div className="flex-shrink-0">
+                          <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium">
+                            JD
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-2">
+                            <h3 className="font-medium">John Doe</h3>
+                            <span className="text-xs text-muted-foreground">
+                              3 days ago
+                            </span>
+                          </div>
+                          <div className="flex items-center mb-3">
+                            <StarRating rating={5} />
+                          </div>
+                          <p className="text-muted-foreground text-sm mb-3">
+                            This is an excellent implementation of MCP. The
+                            documentation is clear and comprehensive, and the
+                            API is intuitive and easy to use. I was able to
+                            integrate it into my project in just a few minutes.
+                          </p>
+                          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                            <button className="flex items-center gap-1 hover:text-foreground transition-colors">
+                              <Star className="h-3 w-3" />
+                              Helpful (12)
+                            </button>
+                            <button className="hover:text-foreground transition-colors">
+                              Reply
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-6 pb-6 border-b">
+                        <div className="flex-shrink-0">
+                          <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium">
+                            AS
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-2">
+                            <h3 className="font-medium">Alice Smith</h3>
+                            <span className="text-xs text-muted-foreground">
+                              1 week ago
+                            </span>
+                          </div>
+                          <div className="flex items-center mb-3">
+                            <StarRating rating={4} />
+                          </div>
+                          <p className="text-muted-foreground text-sm mb-3">
+                            Very good implementation, but I encountered a few
+                            issues with the error handling. Otherwise, it's a
+                            solid choice for MCP integration.
+                          </p>
+                          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                            <button className="flex items-center gap-1 hover:text-foreground transition-colors">
+                              <Star className="h-3 w-3" />
+                              Helpful (7)
+                            </button>
+                            <button className="hover:text-foreground transition-colors">
+                              Reply
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-6">
+                        <div className="flex-shrink-0">
+                          <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium">
+                            RM
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-2">
+                            <h3 className="font-medium">Robert Miller</h3>
+                            <span className="text-xs text-muted-foreground">
+                              2 weeks ago
+                            </span>
+                          </div>
+                          <div className="flex items-center mb-3">
+                            <StarRating rating={5} />
+                          </div>
+                          <p className="text-muted-foreground text-sm mb-3">
+                            I've tried several MCP implementations, and this is
+                            by far the best one. The performance is outstanding,
+                            and the API is well-designed and consistent.
+                          </p>
+                          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                            <button className="flex items-center gap-1 hover:text-foreground transition-colors">
+                              <Star className="h-3 w-3" />
+                              Helpful (15)
+                            </button>
+                            <button className="hover:text-foreground transition-colors">
+                              Reply
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <Button variant="outline" className="w-full mt-6">
+                      Load More Reviews
+                    </Button>
+                  </TabsContent>
+                </Tabs>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-6">
+              <div className="bg-white border border-border/40 rounded-xl shadow-sm p-6">
+                <h3 className="text-lg font-semibold mb-4">Server Info</h3>
+
+                <div className="space-y-4">
+                  <div>
+                    <div className="text-sm text-muted-foreground mb-1">
+                      Category
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Tag className="h-4 w-4 text-primary" />
+                      <span className="capitalize">{server.category}</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-sm text-muted-foreground mb-1">
+                      SDK Support
+                    </div>
+                    {repoData.languages?.length > 0 && (
+                      <div className="flex items-center gap-2">
+                        <Code className="h-4 w-4 text-primary" />
+                        <span>{repoData.languages.join(", ")}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    <div className="text-sm text-muted-foreground mb-1">
+                      GitHub
+                    </div>
+                    <a
+                      href={server.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-primary hover:underline"
+                    >
+                      <Github className="h-4 w-4" />
+                      <span>View Repository</span>
+                    </a>
+                  </div>
+
+                  <div>
+                    <div className="text-sm text-muted-foreground mb-1">
+                      Added
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4" />
+                      <span>{repoData.createdAt || "N/A"}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-6 border-t">
+                  {/* <Button className="w-full">Add to Favorites</Button> */}
+                  <Button
+                    variant="outline"
+                    className="w-full mt-2"
+                    onClick={() => {
+                      if (server?.github) {
+                        window.open(`${server.github}/issues/new`, "_blank");
+                      } else {
+                        alert("GitHub URL not available for this server.");
+                      }
+                    }}
+                  >
+                    Report Issue
+                  </Button>
+                </div>
+              </div>
+
+              {/* <div className="bg-primary/5 rounded-xl p-6">
+                <h3 className="text-lg font-semibold mb-4">Related Servers</h3>
+                <div className="space-y-4">
+                  {relatedServers.map((relatedServer) => (
+                    <Link
+                      key={relatedServer.id}
+                      to={`/server/${relatedServer.id}`}
+                      className="block p-4 bg-white rounded-lg border border-border/40 hover:shadow-md transition-all hover:-translate-y-1"
+                    >
+                      <h4 className="font-medium mb-1">{relatedServer.name}</h4>
+                      <p className="text-sm text-muted-foreground line-clamp-2 mb-2">
+                        {relatedServer.description}
+                      </p>
+                      <div className="flex items-center text-xs text-muted-foreground">
+                        <div className="flex items-center">
+                          <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
+                          <span>{relatedServer.rating.toFixed(1)}</span>
+                        </div>
+                        <span className="mx-2">•</span>
+                        <span className="capitalize">{relatedServer.type}</span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div> */}
             </div>
           </div>
         </div>
       </main>
-      
+
       <Footer />
     </PageTransition>
   );

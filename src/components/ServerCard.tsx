@@ -1,8 +1,7 @@
-
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Star, ArrowUpRight, Heart } from "lucide-react";
-import { type ServerClient } from "@/lib/types";
+import { type ServerClient } from "@/lib/mockData";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";

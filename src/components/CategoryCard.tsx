@@ -1,7 +1,6 @@
-
 import React,{useState} from 'react';
 import { Link } from 'react-router-dom';
-import { type Category, type ServerClient } from '@/lib/types';
+import { type Category,type ServerClient } from '@/lib/mockData';
 import { cn } from '@/lib/utils';
 import { servers } from "@/lib/mockData";
 interface CategoryCardProps {
@@ -40,5 +39,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, className }) => {
     </Link>
   );
 };
+
+
 
 export default CategoryCard;

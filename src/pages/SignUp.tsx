@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -24,8 +23,7 @@ const SignUp = () => {
     }
 
     try {
-      // Update this to match the expected parameters in AuthContext
-      await signUp(email, password);
+      await signUp(name, email, password);
     } catch (err) {
       // Error is handled by the auth context
     }
@@ -108,4 +106,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUp; 
