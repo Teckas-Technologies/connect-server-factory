@@ -730,7 +730,24 @@ export const serverSetupInstructions: Record<string, {
   }
 };
 
-// Helper function to get server by ID
+// Helper functions to get server data
 export const getServerById = (id: string): ServerClient | undefined => {
   return servers.find(server => server.id === id);
 };
+
+export const getFeaturedServers = (): ServerClient[] => {
+  return servers.filter(server => server.featured);
+};
+
+export const getLatestServers = (): ServerClient[] => {
+  return [...servers].sort((a, b) => 
+    new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  );
+};
+
+export const getTopRatedServers = (): ServerClient[] => {
+  return [...servers].sort((a, b) => b.stars - a.stars);
+};
+
+// Import and re-export community servers
+export { communityServers } from './communityServers';

@@ -102,8 +102,7 @@ const Browse = () => {
         (server) =>
           server.name.toLowerCase().includes(searchQuery) ||
           server.description.toLowerCase().includes(searchQuery) ||
-          server.tags.some((tag) => tag.toLowerCase().includes(searchQuery)) ||
-          server.sdkType.some((sdk) => sdk.toLowerCase().includes(searchQuery))
+          server.tags.some((tag) => tag.toLowerCase().includes(searchQuery))
       );
     }
 
@@ -115,8 +114,7 @@ const Browse = () => {
         return filters.some((filter) => {
           return (
             server.category.toLowerCase() === filter ||
-            server.type.toLowerCase() === filter ||
-            server.sdkType.some((sdk) => sdk.toLowerCase() === filter)
+            server.type.toLowerCase() === filter
           );
         });
       });

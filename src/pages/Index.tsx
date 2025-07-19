@@ -288,7 +288,7 @@ const Index = () => {
                   <h2 className="text-2xl font-bold">Top Rated</h2>
                 </div>
                 <div className="grid gap-6">
-                  {topRated.map((server) => (
+                  {topRatedServers.map((server) => (
                     <ServerCard key={server.id} server={server} />
                   ))}
                 </div>
